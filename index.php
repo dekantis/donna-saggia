@@ -2,11 +2,8 @@
 <? $APPLICATION->SetTitle("Интернет-магазин \"Одежда\""); ?>
 <section>
 	<?
-	$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"carousel", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+	$APPLICATION->IncludeComponent("bitrix:news.list", "carousel", array(
+	"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -67,7 +64,10 @@
 		"RESIZE_IMAGE_WEIGHT" => "221",
 		"RESIZE_IMAGE_HEIGHT" => "340"
 	),
-	false
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "Y"
+	)
 );
 	?>
 	<?
