@@ -129,35 +129,8 @@ $arParams['MESS_COMMENTS_TAB'] = $arParams['MESS_COMMENTS_TAB'] ?: Loc::getMessa
 $arParams['MESS_SHOW_MAX_QUANTITY'] = $arParams['MESS_SHOW_MAX_QUANTITY'] ?: Loc::getMessage('CT_BCE_CATALOG_SHOW_MAX_QUANTITY');
 $arParams['MESS_RELATIVE_QUANTITY_MANY'] = $arParams['MESS_RELATIVE_QUANTITY_MANY'] ?: Loc::getMessage('CT_BCE_CATALOG_RELATIVE_QUANTITY_MANY');
 $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'] ?: Loc::getMessage('CT_BCE_CATALOG_RELATIVE_QUANTITY_FEW');
-
-$positionClassMap = array(
-	'left' => 'product-item-label-left',
-	'center' => 'product-item-label-center',
-	'right' => 'product-item-label-right',
-	'bottom' => 'product-item-label-bottom',
-	'middle' => 'product-item-label-middle',
-	'top' => 'product-item-label-top'
-);
-
-$discountPositionClass = 'product-item-label-big';
-if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y' && !empty($arParams['DISCOUNT_PERCENT_POSITION']))
-{
-	foreach (explode('-', $arParams['DISCOUNT_PERCENT_POSITION']) as $pos)
-	{
-		$discountPositionClass .= isset($positionClassMap[$pos]) ? ' '.$positionClassMap[$pos] : '';
-	}
-}
-
-$labelPositionClass = 'product-item-label-big';
-if (!empty($arParams['LABEL_PROP_POSITION']))
-{
-	foreach (explode('-', $arParams['LABEL_PROP_POSITION']) as $pos)
-	{
-		$labelPositionClass .= isset($positionClassMap[$pos]) ? ' '.$positionClassMap[$pos] : '';
-	}
-}
 ?>
-<div class="product" id="<?=$itemIds["ID"]?>" itemscope itemtype="http://schema.org/Product">
+<div class="product">
 	<div class="product-left">
 		<div class="big-image" id="<?=$itemIds["BIG_SLIDER_ID"]?>">
 			<? if (!empty($actualItem["MORE_PHOTO"])) : ?>
@@ -188,7 +161,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 				<? endif; ?>
 				
 				<div class="price">
-						<? if ($arParams["SHOW_OLD_PRICE"] === "Y" && $price["PRINT_RATIO_BASE_PRICE"]!=$price["PRINT_RATIO_PRICE"]): ?>
+						<? if ($arParams["SHOW_OLD_PRICE"] === "Y") : ?>
 							<div class="price-old" id="<?=$itemIds["OLD_PRICE_ID"]?>">
 								<?= $price["PRINT_RATIO_BASE_PRICE"] ?>
 							</div>

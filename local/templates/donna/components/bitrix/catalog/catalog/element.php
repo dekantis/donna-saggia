@@ -227,18 +227,5 @@ if (isset($arParams["USE_COMMON_SETTINGS_BASKET_POPUP"]) && $arParams["USE_COMMO
       $component
     );
     ?>
-
-    <?
-    $APPLICATION->IncludeComponent(
-      "integration:catalog.element.recommended",
-      ".default",
-      array(
-        "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-        "SECTION_ID" => $arParams["SECTION_ID"],
-        "ELEMENT_ID" => $elementId
-      ),
-      $component
-    );
-    ?>
   </div>
 </div>

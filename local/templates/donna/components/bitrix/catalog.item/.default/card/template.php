@@ -69,10 +69,11 @@ if ($item["PROPERTIES"]["SALE"]["VALUE"] == "10"):?>
 							id="<?= $itemIds["PRICE"] ?>">
 							<? if (!empty($price)) : ?>
 								
-								<? if($priceList["PRICE"] > $priceList["DISCOUNT_PRICE"]): ?>
-								<span style="color:#e52b2d;"><?=$price["PRINT_RATIO_BASE_PRICE"]?></span>
+								<? if($priceList["PRICE"] > $priceList["DISCOUNT_PRICE"]):?>
+								
+								<span style="color:#e52b2d;"><?=$price["PRINT_RATIO_PRICE"]?></span>
 								<span style="color: #353535;  font-family: 'proxima_nova_rgregular', sans-serif; text-decoration: line-through;">
-								<?=$price["PRINT_RATIO_PRICE"]?></span>
+								<?=$price["PRINT_RATIO_BASE_PRICE"]?></span>
 								<? else: ?>
 									<?= $price["PRINT_RATIO_PRICE"] ?>
 								<? endif; ?>

@@ -806,4 +806,4 @@ $arTemplateParameters['USE_RATIO_IN_RANGES'] = array(
 	'TYPE' => 'CHECKBOX',
 	'HIDDEN' => isset($arCurrentValues['USE_PRICE_COUNT']) && $arCurrentValues['USE_PRICE_COUNT'] === 'Y' ? 'N' : 'Y',
 	'DEFAULT' => 'Y'
-);?>
+);

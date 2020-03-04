@@ -1,0 +1,11 @@
+.property-name {
+	display:none;
+}
+
+@media (max-width: 630px) {
+  .property-name {
+    display: inline-block;
+    margin-right: 2rem;
+    color: #a3a3a3;
+  }
+}
