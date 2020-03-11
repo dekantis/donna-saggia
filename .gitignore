@@ -1,0 +1,5 @@
+.vscode
+/bitrix/*
+!/bitrix/php_interface/
+!/bitrix/templates/
+/upload/
