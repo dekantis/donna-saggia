@@ -17,9 +17,6 @@
   font-style: normal;
 
 }
-
-/* browser reset */
-
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
@@ -68,9 +65,6 @@ a {
 	vertical-align: baseline;
 	background: transparent;
 }
-
-/* change colours to suit your needs */
-
 ins {
 	background-color: #ff9;
 	color: #000;

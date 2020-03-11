@@ -162,7 +162,13 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 		<div class="product-left">
 		<?if (!empty($actualItem['MORE_PHOTO']))
 		{?>
-			<div class="big-image" data-entity="images-container"></div>
+			<div class="big-image" data-entity="images-container" id="<?=$itemIds['BIG_SLIDER_ID']?>">
+			<? if (!empty($actualItem["MORE_PHOTO"])) : ?>
+				<a class="fancy" href="<?=$actualItem["MORE_PHOTO"][0]["SRC"]?>" >
+					<img src="<?=$actualItem["MORE_PHOTO"][0]["SRC"]?>">
+				</a>
+			<? endif; ?>
+		</div>
 		<?}?>	
 			<div class="share">
 				<script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
@@ -393,11 +399,6 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 		
 		
 	</div>
-	<!--Small Card-->
-	
-	<!--Top tabs-->
-	
-
 	<meta itemprop="name" content="<?=$name?>" />
 	<meta itemprop="category" content="<?=$arResult['CATEGORY_PATH']?>" />
 	<?

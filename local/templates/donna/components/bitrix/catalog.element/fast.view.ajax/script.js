@@ -20,25 +20,6 @@ jQuery(document).ready(function() {
 	}
 	return false;
 	});
-	$('.cusrousel-mini').slick({
-	dots: false,
-	infinite: false,
-	speed: 500,
-	slidesToShow: 5,
-	slidesToScroll: 5,
-	responsive: [
-	{
-	  breakpoint: 1024,
-	  settings: {
-		slidesToShow: 3,
-		slidesToScroll: 3,
-		centerPadding: '5px',
-	  }
-	}
-
-
-	]
-	});
 	//event slider
 	jQuery(".cusrousel-mini a").click(function(){
 	if(!jQuery(this).hasClass("active")){
@@ -1387,20 +1368,7 @@ jQuery(document).ready(function() {
 			}
 		},
 
-		initPopup: function()
-		{
-			// if (this.config.usePopup)
-			// {
-			// 	this.node.imageContainer.style.cursor = 'zoom-in';
-			// 	BX.bind(this.node.imageContainer, 'click', BX.delegate(this.toggleMainPictPopup, this));
-			// 	BX.bind(document, 'keyup', BX.proxy(this.closeByEscape, this));
-			// 	BX.bind(
-			// 		this.getEntity(this.obBigSlider, 'close-popup'),
-			// 		'click',
-			// 		BX.proxy(this.hideMainPictPopup, this)
-			// 	);
-			// }
-		},
+		initPopup: function(){},
 
 		checkSliderControls: function(count)
 		{
@@ -1471,16 +1439,6 @@ jQuery(document).ready(function() {
 			{
 				this.smallCardNodes.picture.setAttribute('src', this.currentImg.src);
 			}
-
-			// if (this.config.useMagnifier && !this.isTouchDevice)
-			// {
-			// 	this.setMagnifierParams();
-
-			// 	if (showImage)
-			// 	{
-			// 		this.disableMagnifier(true);
-			// 	}
-			// }
 		},
 
 		setMagnifierParams: function()

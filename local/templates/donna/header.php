@@ -18,10 +18,10 @@ use Bitrix\Main\Page\Asset;
 	<?Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/scripts/jquery.zoom.min.js");?>
 	<?Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/scripts/scripts.js");?>
 
-			<!--[if lt IE 9]>
+	<!--[if lt IE 9]>
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 
-		<![endif]-->
+	<![endif]-->
 
 
 	<title><?$APPLICATION->ShowTitle();?></title>
@@ -30,16 +30,12 @@ use Bitrix\Main\Page\Asset;
 <body>
 <section id="wrapper">
 	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
-	
-		<!-- start header -->
 		<header id="header">	
 			<div class="inner">
 				<div id="logo">
-					<a href="<?=SITE_DIR?>" title="Название"><!-- logo should be used as background --></a>
-				</div>		
-				
+					<a href="<?=SITE_DIR?>" title="Название"></a>
+				</div>
 				<div class="search-section">
-					<!-- start form -->
 					<form action="" method="post">			
 						<fieldset>
 							<div class="search">
@@ -48,9 +44,7 @@ use Bitrix\Main\Page\Asset;
 							</div>					
 						</fieldset>				
 					</form>
-					<!-- end of form -->
 				</div>
-				
 				<?
 				$APPLICATION->IncludeFile(
 					SITE_DIR."include/phones1.html",
@@ -58,18 +52,19 @@ use Bitrix\Main\Page\Asset;
 					Array("MODE"=>"html")
 				);
 				?>
-				
 				<div class="acount-info">
 					<div class="login">
-						<a href="#">Зарегистрироваться</a>
-						<a href="#">Войти</a>
+					<?if(!$USER->IsAuthorized()):?>
+						<a href="<?=SITE_DIR."auth/"?>">Зарегистрироваться</a>
+						<a href="<?=SITE_DIR."login/"?>">Войти</a>
+					<?endif;?>
 					</div>
 	
 					<div class="bag">
 						<?
 						$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "", Array(
 								"PATH_TO_BASKET" => SITE_DIR . "bag/",	// Страница корзины
-								"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",	// Страница оформления заказа
+								"PATH_TO_ORDER" => SITE_DIR."bag/",	// Страница оформления заказа
 								"SHOW_NUM_PRODUCTS" => "Y",	// Показывать количество товаров
 								"SHOW_TOTAL_PRICE" => "Y",	// Показывать общую сумму по товарам
 								"SHOW_EMPTY_VALUES" => "Y",	// Выводить нулевые значения в пустой корзине
@@ -94,8 +89,6 @@ use Bitrix\Main\Page\Asset;
 				<div class="mobile-menu"><span></span><div>МЕНЮ</div></div>
 			</div>			
 		</header>
-		<!-- end of header -->
-
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:menu",
 			"top_menu",

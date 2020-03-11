@@ -1,16 +1,8 @@
-
-
-/* floating */
-
 .left  { float: left!important; } 
 .right { float: right!important;}
-
-/* text aligments */
-
 .text-left  { text-align: left!important; }
 .text-right { text-align: right!important; }
 .text-center { text-align: center!important; }
-
 
 #header:after,
 .news:after,
@@ -45,8 +37,6 @@
 .contact-form input[type=submit]:hover {
   opacity: 0.7;
 }
-/* go structure */
-
 #wrapper { 
   max-width: 1230px;
   margin: 0 auto;
@@ -58,9 +48,6 @@
 .inner {
   padding: 0 2.4%;
 }
-
-/* start header */
-
 #header{
   padding: 0.8rem 0;
   position: relative;
@@ -151,7 +138,6 @@
   line-height: 16px;
 }
 
-/*catalog*/
 .sidebar-left {
   width: 170px;
   float: left;
@@ -187,11 +173,6 @@
   overflow: hidden;
   margin-bottom: 1rem;
 }
-
-/*bag*/
-
-
-
 .mobile-menu {
   display: none;
   box-sizing: border-box;
@@ -246,14 +227,6 @@
   transition: all 0.5s ease 0s;
   width: 45px;
 }
-
-
-
-
-
-
-/* start footer */
-
 #footer {
   border-top: 1px solid #e3e3e3;
   position: relative;

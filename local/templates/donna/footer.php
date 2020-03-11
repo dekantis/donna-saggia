@@ -1,8 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<!-- end of container -->
 		</div>		
 	</section>
-	<!-- start footer -->
 	<footer id="footer">	
 		<div class="inner">
 			<?
@@ -80,9 +78,5 @@
 			?>
 		</div>
 	</footer>
-	<!-- end of footer -->
-	
-<!-- end of wrapper -->
-
 </body>
 </html>

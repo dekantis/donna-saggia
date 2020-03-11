@@ -16,10 +16,6 @@ jQuery(document).ready(function() {
 		jQuery("html, body").animate({scrollTop : 0},1000);
 		return false;
 	  });
-		$('.carousel').flexslider({
-		controlNav: false,
-		
-	  });
 });
 function JCSmartFilter(ajaxURL, viewMode, params)
 {

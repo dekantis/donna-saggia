@@ -68,9 +68,7 @@ $APPLICATION->SetTitle("Мебельная компания");
 		"USE_SHARE" => "N"
 	),
 	false
-);?>
-  
-  <!-- start container -->		
+);?>	
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section.list", 
 	"main", 
@@ -108,10 +106,7 @@ $APPLICATION->SetTitle("Мебельная компания");
 	),
 	false
 );?>
-    <!-- end of categories -->
-    
-    <!-- start news -->
-    <?$APPLICATION->IncludeComponent(
+<?$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"news.list.main", 
 	array(
@@ -185,13 +180,11 @@ $APPLICATION->SetTitle("Мебельная компания");
 	),
 	false
 );?>
-    <!-- end of news -->
-	<?
-		$APPLICATION->IncludeFile(
-			SITE_DIR."include/bottom_main.html",
-			Array(),
-			Array("MODE"=>"html")
-		);
-	?>
-</section>
+<?
+	$APPLICATION->IncludeFile(
+		SITE_DIR."include/bottom_main.html",
+		Array(),
+		Array("MODE"=>"html")
+	);
+?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

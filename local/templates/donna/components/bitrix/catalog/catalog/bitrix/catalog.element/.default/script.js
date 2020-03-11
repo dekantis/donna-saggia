@@ -9,7 +9,6 @@ jQuery(document).ready(function() {
 	}
 	})
 	$('a.fancy').zoom();
-	//tabs
 	jQuery(".tab-list li a").click(function(){
 	if(!jQuery(this).parent().hasClass("active")){
 	  jQuery(this).parents(".tab-list").find("li").removeClass("active");
@@ -39,7 +38,6 @@ jQuery(document).ready(function() {
 
 	]
 	});
-	//event slider
 	jQuery(".cusrousel-mini a").click(function(){
 	if(!jQuery(this).hasClass("active")){
 	  jQuery(".cusrousel-mini a").removeClass("active");
@@ -222,7 +220,7 @@ jQuery(document).ready(function() {
 		this.obTabsPanel = null;
 
 		this.node = {};
-		// top panel small card
+
 		this.smallCardNodes = {};
 
 		this.magnify = {
@@ -1387,20 +1385,7 @@ jQuery(document).ready(function() {
 			}
 		},
 
-		initPopup: function()
-		{
-			// if (this.config.usePopup)
-			// {
-			// 	this.node.imageContainer.style.cursor = 'zoom-in';
-			// 	BX.bind(this.node.imageContainer, 'click', BX.delegate(this.toggleMainPictPopup, this));
-			// 	BX.bind(document, 'keyup', BX.proxy(this.closeByEscape, this));
-			// 	BX.bind(
-			// 		this.getEntity(this.obBigSlider, 'close-popup'),
-			// 		'click',
-			// 		BX.proxy(this.hideMainPictPopup, this)
-			// 	);
-			// }
-		},
+		initPopup: function(){},
 
 		checkSliderControls: function(count)
 		{
@@ -1471,16 +1456,6 @@ jQuery(document).ready(function() {
 			{
 				this.smallCardNodes.picture.setAttribute('src', this.currentImg.src);
 			}
-
-			// if (this.config.useMagnifier && !this.isTouchDevice)
-			// {
-			// 	this.setMagnifierParams();
-
-			// 	if (showImage)
-			// 	{
-			// 		this.disableMagnifier(true);
-			// 	}
-			// }
 		},
 
 		setMagnifierParams: function()
@@ -1491,7 +1466,6 @@ jQuery(document).ready(function() {
 
 			while (l--)
 			{
-				// disable image title show
 				current = images[l].querySelector('img');
 				current.setAttribute('data-title', current.getAttribute('title') || '');
 				current.removeAttribute('title');
@@ -1526,7 +1500,6 @@ jQuery(document).ready(function() {
 			this.currentImg.node.style.backgroundSize = '100% auto';
 			if (animateSize)
 			{
-				// set initial size for css animation
 				this.currentImg.node.style.height = this.magnify.height + 'px';
 				this.currentImg.node.style.width = this.magnify.width + 'px';
 
@@ -1567,7 +1540,6 @@ jQuery(document).ready(function() {
 					clearTimeout(this.magnify.timer);
 					BX.addClass(this.obBigSlider, 'magnified');
 
-					// set initial size for css animation
 					this.currentImg.node.style.height = (this.magnify.height = this.currentImg.node.clientHeight) + 'px';
 					this.currentImg.node.style.width = (this.magnify.width = this.currentImg.node.offsetWidth) + 'px';
 
@@ -1587,11 +1559,9 @@ jQuery(document).ready(function() {
 						zoomPercent = this.config.magnifierZoomPercent > 100 ? this.config.magnifierZoomPercent : 100;
 					}
 
-					// base64 transparent pixel
 					this.currentImg.node.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12P4zwAAAgEBAKrChTYAAAAASUVORK5CYII=';
 					this.currentImg.node.style.backgroundSize = zoomPercent + '% auto';
 
-					// set target size
 					this.magnify.timer = setTimeout(BX.delegate(function(){
 							this.currentImg.node.style.height = h + 'px';
 							this.currentImg.node.style.width = w + 'px';
@@ -1846,7 +1816,7 @@ jQuery(document).ready(function() {
 			this.config.useMagnifier && this.disableMagnifier(false);
 			BX.addClass(this.obBigSlider, 'popup');
 			this.node.imageContainer.style.cursor = '';
-			// remove double scroll bar
+
 			document.body.style.overflow = 'hidden';
 		},
 
@@ -1855,7 +1825,6 @@ jQuery(document).ready(function() {
 			this.config.useMagnifier && this.disableMagnifier(false);
 			BX.removeClass(this.obBigSlider, 'popup');
 			this.node.imageContainer.style.cursor = 'zoom-in';
-			// remove double scroll bar
 			document.body.style.overflow = '';
 		},
 
@@ -2667,9 +2636,9 @@ jQuery(document).ready(function() {
 				this.incViewedCounter();
 
 				eventData.newId = this.offers[this.offerNum].ID;
-				// only for compatible catalog.store.amount custom templates
+
 				BX.onCustomEvent('onCatalogStoreProductChange', [this.offers[this.offerNum].ID]);
-				// new event
+
 				BX.onCustomEvent('onCatalogElementChangeOffer', [eventData]);
 				eventData = null;
 			}
@@ -3563,20 +3532,6 @@ jQuery(document).ready(function() {
 			}
 		},
 
-		fixFontCheck: function()
-		{
-			// if (BX.type.isDomNode(this.obPrice.price))
-			// {
-			// 	BX.FixFontSize && BX.FixFontSize.init({
-			// 		objList: [{
-			// 			node: this.obPrice.price,
-			// 			maxFontSize: 28,
-			// 			smallestValue: false,
-			// 			scaleBy: this.obPrice.price.parentNode
-			// 		}],
-			// 		onAdaptiveResize: true
-			// 	});
-			// }
-		}
+		fixFontCheck: function(){}
 	}
 })(window);

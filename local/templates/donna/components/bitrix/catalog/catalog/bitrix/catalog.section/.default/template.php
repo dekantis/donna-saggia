@@ -190,10 +190,8 @@ if ($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y')
 		if ($showTopPager)
 		{
 			?>
-			<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">
-				<!-- pagination-container -->		
+			<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">		
 				<?=$arResult['NAV_STRING']?>
-				<!-- pagination-container -->
 			</div>
 			<?
 		}
@@ -235,7 +233,6 @@ if ($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y')
 	}
 	else
 	{
-		// load css for bigData/deferred load
 		$APPLICATION->IncludeComponent(
 			'bitrix:catalog.item',
 			'',
@@ -268,9 +265,7 @@ if ($showLazyLoad)
 	{
 		?>
 		<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">
-			<!-- pagination-container -->
 			<?=$arResult['NAV_STRING']?>
-			<!-- pagination-container -->
 		</div>
 		<?
 	}
@@ -320,4 +315,3 @@ $signedParams = $signer->sign(base64_encode(serialize($arResult['ORIGINAL_PARAME
 		container: '<?=$containerName?>'
 	});
 </script>
-<!-- component-end -->

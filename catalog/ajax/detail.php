@@ -16,13 +16,13 @@ $APPLICATION->IncludeComponent(
 		"ADD_PROPERTIES_TO_BASKET" => "Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"ADD_TO_BASKET_ACTION" => array(
-			0 => "BUY",
+			0 => "ADD",
 		),
 		"ADD_TO_BASKET_ACTION_PRIMARY" => array(
-			0 => "BUY",
+			0 => "ADD",
 		),
 		"BACKGROUND_IMAGE" => "-",
-		"BASKET_URL" => "/personal/basket.php",
+		"BASKET_URL" => "/bag/",
 		"BRAND_USE" => "N",
 		"BROWSER_TITLE" => "-",
 		"CACHE_GROUPS" => "Y",

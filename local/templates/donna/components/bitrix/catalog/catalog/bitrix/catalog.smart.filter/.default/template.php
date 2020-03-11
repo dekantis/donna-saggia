@@ -15,7 +15,6 @@ $this->setFrameMode(true);
 <div class="filter">
 	<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="smartfilter">
 		<?
-		//not prices
 		foreach($arResult["ITEMS"] as $key=>$arItem)
 		{	
 			if(

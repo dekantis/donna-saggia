@@ -4,11 +4,6 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 
 $this->setFrameMode(true);
 ?>
-
-
-
-
-
 	<h3><?=GetMessage("SS_TITLE")?></h3>
 
 	<div class="icons">

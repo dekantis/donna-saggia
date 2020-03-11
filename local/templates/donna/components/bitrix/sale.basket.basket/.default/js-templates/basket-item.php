@@ -38,10 +38,10 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 		{{/SHOW_RESTORE}}
 		{{^SHOW_RESTORE}}
 			<td class="product-photo">
-				<a href="{{DETAIL_PAGE_URL}}"><img src="{{IMAGE_URL}}"></a>
+				<img src="{{IMAGE_URL}}">
 			</td>
 			<td class="product-name">
-				<h3><a href="{{DETAIL_PAGE_URL}}">{{NAME}}</a></h3>
+				<h3>{{NAME}}</h3>
 				{{#PREVIEW_TEXT}}
 					<p>{{{PREVIEW_TEXT}}}</p>
 				{{/PREVIEW_TEXT}}

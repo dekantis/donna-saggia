@@ -33,7 +33,7 @@ if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y')
 		switch($key)
 		{
 			case 'SALE':
-				if ($price['PRINT_RATIO_BASE_PRICE']>$price['RATIO_PRICE'])
+				if ($price['RATIO_BASE_PRICE'] > $price['RATIO_PRICE'])
 				{
 					echo ' sale';
 				}

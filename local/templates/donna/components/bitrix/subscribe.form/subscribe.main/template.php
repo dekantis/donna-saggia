@@ -17,7 +17,6 @@ $this->setFrameMode(true);
 <?
 $frame = $this->createFrame("subscribe-form", false)->begin();
 ?>
-	<!-- start form -->
 	<form action="<?=$arResult["FORM_ACTION"]?>" method="post">			
 		<fieldset>
 			<div class="subscribe">
@@ -26,7 +25,6 @@ $frame = $this->createFrame("subscribe-form", false)->begin();
 			</div>					
 		</fieldset>				
 	</form>
-	<!-- end of form -->
 
 </div>
 		

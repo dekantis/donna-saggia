@@ -147,13 +147,9 @@ if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS']))
 										
 	}
 	unset($generalParams, $rowItems);
-	?>
-	<!-- items-container -->
-	<?
 }
 else
 {
-	// load css for bigData/deferred load
 	$APPLICATION->IncludeComponent(
 		'bitrix:catalog.item',
 		'',
