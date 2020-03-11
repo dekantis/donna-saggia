@@ -1,32 +1,27 @@
-.blog-add-comment .bx_bt_button {
+.page-navigation a, .page-navigation span {
     display: inline-block;
     vertical-align: top;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     box-sizing: border-box;
-    font-family: 'proxima_nova_rgregular', sans-serif;
-    font-size: 14px;
+    line-height: 23px;
+    color: #353535;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 12px;
+    border: 1px solid #dedede;
     text-align: center;
     border-radius: 3px;
     cursor: pointer;
     text-decoration: none;
-    transition: opacity 0.5s;
+    -webkit-transition: background-color 0.5s;
+    transition: background-color 0.5s;
+}
+.page-navigation span {
+    background: #f34648;
+    border-color: #f13e41;
     color: #fff;
-    margin-bottom: 1rem;
     background: -webkit-linear-gradient(to top, #d81617 0%, #f34648 70%, #f34648 100%);
     background: -moz-linear-gradient(to top, #d81617 0%, #f34648 70%, #f34648 100%);
     background: -ms-linear-gradient(to top, #d81617 0%, #f34648 70%, #f34648 100%);
     background: linear-gradient(to top, #d81617 0%, #f34648 70%, #f34648 100%);
-}
-.bx_soc_comments_div.bx_important .bx_medium.bx_bt_button {
-    width: 200px;
-    height: 27px;
-    line-height: 27px;
-}
-input[type="text"], input[type="password"] {
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 0 1rem;
-    border: 1px solid #979797;
-    height: 30px;
-    border-radius: 3px;
 }

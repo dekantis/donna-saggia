@@ -20,8 +20,7 @@ use \Bitrix\Main\Localization\Loc;
  */
 
 $this->setFrameMode(true);
-
-if (!empty($arResult['NAV_RESULT']))
+if (!empty($arResult['NAV_RESULT']->NavNum))
 {
 	$navParams =  array(
 		'NavPageCount' => $arResult['NAV_RESULT']->NavPageCount,
@@ -41,7 +40,6 @@ else
 $showTopPager = false;
 $showBottomPager = false;
 $showLazyLoad = false;
-
 if ($arParams['PAGE_ELEMENT_COUNT'] > 0 && $navParams['NavPageCount'] > 1)
 {
 	$showTopPager = $arParams['DISPLAY_TOP_PAGER'];
@@ -187,6 +185,7 @@ if ($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y')
 			>по новизне</a>
 		</div>
 		<?
+
 		if ($showTopPager)
 		{
 			?>
