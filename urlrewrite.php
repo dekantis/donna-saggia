@@ -24,6 +24,14 @@ $arUrlRewrite=array (
     'PATH' => '/bitrix/services/ymarket/index.php',
     'SORT' => 100,
   ),
+  13 => 
+  array (
+    'CONDITION' => '#^([^/]+?)/([^/]+?)\\??(.*)#',
+    'RULE' => 'SECTION_ID=$1&ELEMENT_ID=$2&$3',
+    'ID' => 'bitrix:catalog.element',
+    'PATH' => '/catalog/ajax/detail.php',
+    'SORT' => 100,
+  ),
   2 => 
   array (
     'CONDITION' => '#^/online/(/?)([^/]*)#',
@@ -48,12 +56,12 @@ $arUrlRewrite=array (
     'PATH' => '/personal/order/index.php',
     'SORT' => 100,
   ),
-  9 => 
+  14 => 
   array (
-    'CONDITION' => '#^/personal/#',
+    'CONDITION' => '#^/catalog/#',
     'RULE' => '',
-    'ID' => 'bitrix:sale.personal.section',
-    'PATH' => '/personal/index.php',
+    'ID' => 'bitrix:catalog',
+    'PATH' => '/catalog/index.php',
     'SORT' => 100,
   ),
   10 => 
@@ -69,7 +77,7 @@ $arUrlRewrite=array (
     'CONDITION' => '#^\\??(.*)#',
     'RULE' => '&$1',
     'ID' => 'bitrix:catalog.element',
-    'PATH' => '/catalog/ajax/detail.php',
+    'PATH' => '/ajax/detail.php',
     'SORT' => 100,
   ),
   4 => 

@@ -1,85 +1,88 @@
-<footer id="footer">
-  <div class="inner">
-    <div class="footer-phones">
-      <?
-      $APPLICATION->IncludeFile(
-        SITE_DIR . "/include/footer_phones.php",
-        array("MODE" => "HTML")
-      );
-      ?>
-    </div>
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<!-- end of container -->
+		</div>		
+	</section>
+	<!-- start footer -->
+	<footer id="footer">	
+		<div class="inner">
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR."include/phones2.html",
+				Array(),
+				Array("MODE"=>"html")
+			);
+			?>
+		  
+			<?$APPLICATION->IncludeComponent("bitrix:menu", "bottom_menu", Array(
+				"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+					"CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+					"DELAY" => "N",	// Откладывать выполнение шаблона меню
+					"MAX_LEVEL" => "1",	// Уровень вложенности меню
+					"MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+					"MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+					"MENU_CACHE_TYPE" => "N",	// Тип кеширования
+					"MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
+					"ROOT_MENU_TYPE" => "bottom",	// Тип меню для первого уровня
+					"USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+					"COMPONENT_TEMPLATE" => "bottom_menu"
+				),
+				false
+			);?>
+			
+			<?$APPLICATION->IncludeComponent(
+				"bitrix:menu",
+				"company_menu",
+				Array(
+					"ALLOW_MULTI_SELECT" => "N",
+					"CHILD_MENU_TYPE" => "left",
+					"DELAY" => "N",
+					"MAX_LEVEL" => "1",
+					"MENU_CACHE_GET_VARS" => array(""),
+					"MENU_CACHE_TIME" => "3600",
+					"MENU_CACHE_TYPE" => "N",
+					"MENU_CACHE_USE_GROUPS" => "Y",
+					"ROOT_MENU_TYPE" => "company",
+					"USE_EXT" => "N",
+					"COMPONENT_TEMPLATE" => "company_menu"
+				)
+			);?>
+		  
+			<div class="social">
+		  
+				<?$APPLICATION->IncludeComponent(
+					"bitrix:eshop.socnet.links",
+					"links",
+					Array(
+						"FACEBOOK" => "#",
+						"GOOGLE" => "",
+						"INSTAGRAM" => "#",
+						"TWITTER" => "",
+						"VKONTAKTE" => "#"
+					)
+				);?>
+				<?$APPLICATION->IncludeComponent("bitrix:subscribe.form", "subscribe.main", Array(
+					"CACHE_TIME" => "3600",	// Время кеширования (сек.)
+						"CACHE_TYPE" => "A",	// Тип кеширования
+						"PAGE" => "#SITE_DIR#personal/subscribe/subscr_edit.php",	// Страница редактирования подписки (доступен макрос #SITE_DIR#)
+						"SHOW_HIDDEN" => "N",	// Показать скрытые рубрики подписки
+						"USE_PERSONALIZATION" => "Y",	// Определять подписку текущего пользователя
+					),
+					false
+				);?>	
+			</div>
+			
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR."include/copyrigth.html",
+				Array(),
+				Array("MODE"=>"html")
+			);
+			?>
+		</div>
+	</footer>
+	<!-- end of footer -->
+	
+<!-- end of wrapper -->
 
-    <div class="info-menu">
-      <?
-      $APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "info_menu",
-        array(
-          "ROOT_MENU_TYPE" => "info",
-          "ALLOW_MULTI_SELECT" => "N",
-          "COMPONENT_TEMPLATE" => "info_menu",
-          "MENU_CACHE_TYPE" => "N",
-          "MENU_CACHE_TIME" => "3600",
-          "MENU_CACHE_USE_GROUPS" => "Y",
-          "MENU_CACHE_GET_VARS" => array(),
-          "MAX_LEVEL" => "1",
-          "USE_EXT" => "N",
-          "DELAY" => "N"
-        ),
-        false
-      );
-      ?>
-    </div>
-
-    <div class="company-menu">
-      <?
-      $APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "company_menu",
-        array(
-          "ROOT_MENU_TYPE" => "company",
-          "ALLOW_MULTI_SELECT" => "N",
-          "COMPONENT_TEMPLATE" => "company_menu",
-          "MENU_CACHE_TYPE" => "N",
-          "MENU_CACHE_TIME" => "3600",
-          "MENU_CACHE_USE_GROUPS" => "Y",
-          "MENU_CACHE_GET_VARS" => array(),
-          "MAX_LEVEL" => "1",
-          "USE_EXT" => "N",
-          "DELAY" => "N",
-          "CHILD_MENU_TYPE" => "left",
-          "CHUNK_SIZE" => "3"
-        ),
-        false
-      );
-      ?>
-    </div>
-
-    <div class="social">
-
-      <?
-      $APPLICATION->IncludeFile(
-        SITE_DIR . "/include/social.php"
-      );
-      ?>
-
-      <div class="subscribe-section">
-        <?
-        $APPLICATION->IncludeComponent(
-          "bitrix:sender.subscribe",
-          ".default",
-          array(),
-          false
-        );
-        ?>
-      </div>
-    </div>
-    <div class="copyright">
-      <?
-      $APPLICATION->IncludeFile(
-        SITE_DIR . "include/copyright.php"
-      );
-      ?>
-    </div>
-  </div>
-</footer>
+</body>
+</html>

@@ -1,3 +1,26 @@
+jQuery(document).ready(function() {
+	$(".color-filter li").on("click", function(){
+		if($(this).hasClass("active")){
+		  jQuery(this).removeClass("active");
+		  
+		} else {
+		  jQuery(this).addClass("active");
+		  
+		} 
+		jQuery(".result").fadeIn();    
+	  })
+	  $(".result").on("click", function(){
+		jQuery(".result").fadeOut();
+	  });
+	  $(".down").on("click", function(){
+		jQuery("html, body").animate({scrollTop : 0},1000);
+		return false;
+	  });
+		$('.carousel').flexslider({
+		controlNav: false,
+		
+	  });
+});
 function JCSmartFilter(ajaxURL, viewMode, params)
 {
 	this.ajaxURL = ajaxURL;
@@ -35,7 +58,7 @@ JCSmartFilter.prototype.click = function(checkbox)
 	{
 		clearTimeout(this.timer);
 	}
-	
+
 	this.timer = setTimeout(BX.delegate(function(){
 		this.reload(checkbox);
 	}, this), 500);
@@ -64,7 +87,7 @@ JCSmartFilter.prototype.reload = function(input)
 		var values = [];
 		values[0] = {name: 'ajax', value: 'y'};
 		this.gatherInputsValues(values, BX.findChildren(this.form, {'tag': new RegExp('^(input|select)$', 'i')}, true));
-		
+
 		for (var i = 0; i < values.length; i++)
 			this.cacheKey += values[i].name + ':' + values[i].value + '|';
 
@@ -80,6 +103,7 @@ JCSmartFilter.prototype.reload = function(input)
 				var set_filter = BX('set_filter');
 				set_filter.disabled = true;
 			}
+
 			this.curFilterinput = input;
 			BX.ajax.loadJSON(
 				this.ajaxURL,
@@ -180,16 +204,13 @@ JCSmartFilter.prototype.postHandler = function (result, fromCache)
 				this.updateItem(PID, result.ITEMS[PID]);
 			}
 		}
-		
+
 		if (!!modef && !!modef_num)
 		{
 			modef_num.innerHTML = result.ELEMENT_COUNT;
 			hrefFILTER = BX.findChildren(modef, {tag: 'A'}, true);
 
-			if (result.FILTER_URL && hrefFILTER)
-			{
-				// hrefFILTER[0].href = BX.util.htmlspecialcharsback(result.FILTER_URL);
-			}
+
 
 			if (result.FILTER_AJAX_URL && result.COMPONENT_CONTAINER_ID)
 			{
@@ -209,13 +230,16 @@ JCSmartFilter.prototype.postHandler = function (result, fromCache)
 			}
 			else
 			{
+				if (modef.style.display === 'none')
+				{
+					modef.style.display = 'inline-block';
+				}
+
 				if (this.viewMode == "VERTICAL")
 				{
 					curProp = BX.findChild(BX.findParent(this.curFilterinput, {'class':'bx-filter-parameters-box'}), {'class':'bx-filter-container-modef'}, true, false);
-					curProp.appendChild(modef);
 				}
-				jQuery(".result").fadeIn();
-				
+
 				if (result.SEF_SET_FILTER_URL)
 				{
 					this.bindUrlToButton('set_filter', result.SEF_SET_FILTER_URL);
@@ -242,7 +266,22 @@ JCSmartFilter.prototype.bindUrlToButton = function (buttonId, url)
 	var button = BX(buttonId);
 	if (button)
 	{
-		button.href = url;
+		var proxy = function(j, func)
+		{
+			return function()
+			{
+				return func(j);
+			}
+		};
+
+		if (button.type == 'submit')
+			button.type = 'button';
+
+		BX.bind(button, 'click', proxy(url, function(url)
+		{
+			window.location.href = url;
+			return false;
+		}));
 	}
 };
 
@@ -441,7 +480,7 @@ BX.Iblock.SmartFilter = (function()
 			this.rightSlider = BX(arParams.rightSlider);
 			this.tracker = BX(arParams.tracker);
 			this.trackerWrap = BX(arParams.trackerWrap);
-
+			
 			this.minInput = BX(arParams.minInputId);
 			this.maxInput = BX(arParams.maxInputId);
 
@@ -453,7 +492,7 @@ BX.Iblock.SmartFilter = (function()
 
 			this.fltMinPrice = arParams.fltMinPrice ? parseFloat(arParams.fltMinPrice) : parseFloat(arParams.curMinPrice);
 			this.fltMaxPrice = arParams.fltMaxPrice ? parseFloat(arParams.fltMaxPrice) : parseFloat(arParams.curMaxPrice);
-
+			
 			this.precision = arParams.precision || 0;
 
 			this.priceDiff = this.maxPrice - this.minPrice;
@@ -471,6 +510,7 @@ BX.Iblock.SmartFilter = (function()
 			this.isTouch = false;
 
 			this.init();
+			
 
 			if ('ontouchstart' in document.documentElement)
 			{
@@ -514,8 +554,8 @@ BX.Iblock.SmartFilter = (function()
 			priceDiff = this.curMinPrice - this.minPrice;
 			this.leftPercent = (priceDiff*100)/this.priceDiff;
 
-			this.leftSlider.style.left = this.leftPercent + "%";
-			this.colorUnavailableActive.style.left = this.leftPercent + "%";
+			/* this.leftSlider.style.left = this.leftPercent + "%"; */
+			/* this.colorUnavailableActive.style.left = this.leftPercent + "%"; */
 		}
 
 		this.setMinFilteredValue(this.fltMinPrice);
@@ -524,9 +564,6 @@ BX.Iblock.SmartFilter = (function()
 		{
 			priceDiff = this.maxPrice - this.curMaxPrice;
 			this.rightPercent = (priceDiff*100)/this.priceDiff;
-
-			this.rightSlider.style.right = this.rightPercent + "%";
-			this.colorUnavailableActive.style.right = this.rightPercent + "%";
 		}
 
 		this.setMaxFilteredValue(this.fltMaxPrice);
@@ -539,18 +576,6 @@ BX.Iblock.SmartFilter = (function()
 		{
 			var priceDiff = this.fltMinPrice - this.minPrice;
 			this.fltMinPercent = (priceDiff*100)/this.priceDiff;
-
-			if (this.leftPercent > this.fltMinPercent)
-				this.colorAvailableActive.style.left = this.leftPercent + "%";
-			else
-				this.colorAvailableActive.style.left = this.fltMinPercent + "%";
-
-			this.colorAvailableInactive.style.left = this.fltMinPercent + "%";
-		}
-		else
-		{
-			this.colorAvailableActive.style.left = "0%";
-			this.colorAvailableInactive.style.left = "0%";
 		}
 	};
 
@@ -561,18 +586,6 @@ BX.Iblock.SmartFilter = (function()
 		{
 			var priceDiff = this.maxPrice - this.fltMaxPrice;
 			this.fltMaxPercent = (priceDiff*100)/this.priceDiff;
-
-			if (this.rightPercent > this.fltMaxPercent)
-				this.colorAvailableActive.style.right = this.rightPercent + "%";
-			else
-				this.colorAvailableActive.style.right = this.fltMaxPercent + "%";
-
-			this.colorAvailableInactive.style.right = this.fltMaxPercent + "%";
-		}
-		else
-		{
-			this.colorAvailableActive.style.right = "0%";
-			this.colorAvailableInactive.style.right = "0%";
 		}
 	};
 
@@ -858,19 +871,8 @@ BX.Iblock.SmartFilter = (function()
 
 		return false;
 	};
-
+	
 	return SmartFilter;
 })();
 
-$(document).ready(function() {
-	$(".color-filter li").on("click", function() {
-		if($(this).hasClass("active")) {
-			jQuery(this).removeClass("active");
-		} else {
-			jQuery(this).addClass("active");
-		}
-	});
-  $(".result").on("click", function(){
-    jQuery(".result").fadeOut();
-  });
-})
+

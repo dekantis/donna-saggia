@@ -1,8 +1,9 @@
 <?
-$arTemplate = array (
-  'NAME' => 'Donna',
-  'DESCRIPTION' => 'Интеграция верстки',
-  'SORT' => '',
-  'TYPE' => '',
+if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
+	die();
+
+$arTemplate = Array(
+	'NAME' => 'donna_template',
+	'DESCRIPTION' => 'Интернет-магазин женской одежды'
 );
 ?>

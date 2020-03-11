@@ -149,28 +149,6 @@ $arBasketJSParams = array(
 <?
 if (empty($arResult['ERROR_MESSAGE']))
 {
-	if ($arParams['USE_GIFTS'] === 'Y' && $arParams['GIFTS_PLACE'] === 'TOP')
-	{
-		?>
-		<div data-entity="parent-container">
-			<div class="catalog-block-header"
-					data-entity="header"
-					data-showed="false"
-					style="display: none; opacity: 0;">
-				<?=$arParams['GIFTS_BLOCK_TITLE']?>
-			</div>
-			<?
-			$APPLICATION->IncludeComponent(
-				'bitrix:sale.products.gift.basket',
-				'.default',
-				$giftParameters,
-				$component
-			);
-			?>
-		</div>
-		<?
-	}
-
 	if ($arResult['BASKET_ITEM_MAX_COUNT_EXCEEDED'])
 	{
 		?>

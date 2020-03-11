@@ -23,34 +23,32 @@ $APPLICATION->SetTitle("Страница не найдена");?>
 	<div class="col-sm-offset-2 col-sm-4">
 		<div class="bx-map-title"><i class="fa fa-leanpub"></i> Каталог</div>
 		<?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list", 
-	"tree", 
-	array(
-		"COMPONENT_TEMPLATE" => "tree",
-		"IBLOCK_TYPE" => "catalog",
-		"IBLOCK_ID" => "1",
-		"SECTION_ID" => $_REQUEST["SECTION_ID"],
-		"SECTION_CODE" => "",
-		"COUNT_ELEMENTS" => "Y",
-		"TOP_DEPTH" => "2",
-		"SECTION_FIELDS" => array(
-			0 => "",
-			1 => "",
-		),
-		"SECTION_USER_FIELDS" => array(
-			0 => "",
-			1 => "",
-		),
-		"SECTION_URL" => "",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "36000000",
-		"CACHE_GROUPS" => "Y",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"FILTER_NAME" => "sectionsFilter",
-		"CACHE_FILTER" => "N"
-	),
-	false
-);
+			"bitrix:catalog.section.list",
+			"tree",
+			array(
+				"COMPONENT_TEMPLATE" => "tree",
+				"IBLOCK_TYPE" => "catalog",
+				"IBLOCK_ID" => "2",
+				"SECTION_ID" => $_REQUEST["SECTION_ID"],
+				"SECTION_CODE" => "",
+				"COUNT_ELEMENTS" => "Y",
+				"TOP_DEPTH" => "2",
+				"SECTION_FIELDS" => array(
+					0 => "",
+					1 => "",
+				),
+				"SECTION_USER_FIELDS" => array(
+					0 => "",
+					1 => "",
+				),
+				"SECTION_URL" => "",
+				"CACHE_TYPE" => "A",
+				"CACHE_TIME" => "36000000",
+				"CACHE_GROUPS" => "Y",
+				"ADD_SECTIONS_CHAIN" => "Y"
+			),
+			false
+		);
 		?>
 	</div>
 

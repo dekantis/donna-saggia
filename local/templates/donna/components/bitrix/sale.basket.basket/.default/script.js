@@ -1,4 +1,67 @@
 
+jQuery(document).ready(function() {
+	jQuery(".delete").click(function(){
+		if(jQuery(".delete").length == 1){
+		  jQuery(".my-orders").html("Ваша корзина пуста");
+		} else{ 
+		  jQuery(this).parent().parent().remove();
+		}
+		 total();
+		return false;
+	});
+	jQuery("td .quantity input").on("keyup", function(){
+		var cur = jQuery(this).parents("tr").find(".cost-bag span").text()*1;
+		var count = jQuery(this).val()*1;
+		var sum = cur * count;
+		sum = sum.toString();
+		
+		jQuery(this).parents("tr").find(".sum-bag span").text(sum);
+		total();
+	});
+	counter();
+	total();
+	jQuery(".quantity div").on("click", function() {
+    
+    var button = jQuery(this);
+    var oldValue = button.parent().find("input").val();
+
+    if (button.text() == "+") {
+      var newVal = oldValue*1 + 1;
+    } else {
+     // Don't allow decrementing below zero
+      if (oldValue > 0) {
+        var newVal = oldValue*1 - 1;
+      } else {
+        newVal = 0;
+      }
+    }
+
+    button.parent().find("input").val(newVal);
+    jQuery(this).parents(".quantity").find("input").trigger("keyup")
+  });
+});
+
+function total(){
+  var total =0;
+  jQuery(".sum-bag span").each(function(){
+    var s = jQuery(this).text().replace(' ', '')*1;
+    total += Number(s);
+  })
+  total = total.toString();
+  jQuery(".total-n span").text(total);
+}
+function counter(){
+  jQuery(".quantity input").each(function(){
+    var cur = jQuery(this).parents("tr").find(".cost-bag span").text()*1;
+    var count = jQuery(this).val()*1;
+    var sum = cur * count;
+    
+    sum = sum.toString();
+    jQuery(this).parents("tr").find(".sum-bag span").text(sum);
+  });
+  
+}
+	
 BasketPoolQuantity = function()
 {
 	this.processing = false;
@@ -1420,4 +1483,5 @@ BX.ready(function() {
 
 	if (BX.type.isNotEmptyString(basketJSParams['EVENT_ONCHANGE_ON_START']) && basketJSParams['EVENT_ONCHANGE_ON_START'] == "Y")
 		BX.onCustomEvent('OnBasketChange');
+	
 });

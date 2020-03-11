@@ -146,9 +146,7 @@ $generalParams = array(
 	'MESS_BTN_COMPARE' => $arParams['~MESS_BTN_COMPARE'],
 	'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
 	'MESS_BTN_ADD_TO_BASKET' => $arParams['~MESS_BTN_ADD_TO_BASKET'],
-	'MESS_NOT_AVAILABLE' => $arParams['~MESS_NOT_AVAILABLE'],
-	'RESIZE_IMAGE_WIDTH' => $arParams['RESIZE_IMAGE_WEIGHT'],
-	'RESIZE_IMAGE_HEIGHT' => $arParams['RESIZE_IMAGE_HEIGHT']
+	'MESS_NOT_AVAILABLE' => $arParams['~MESS_NOT_AVAILABLE']
 );
 
 $obName = 'ob'.preg_replace('/[^a-zA-Z0-9_]/', 'x', $this->GetEditAreaId($navParams['NavNum']));
@@ -206,7 +204,7 @@ if ($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y')
 	{
 		$areaIds = array();
 		foreach ($arResult['ITEMS'] as $item)
-		{
+		{	
 			$uniqueId = $item['ID'].'_'.md5($this->randString().$component->getAction());
 			$areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
 			$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);

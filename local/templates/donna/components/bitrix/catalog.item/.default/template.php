@@ -1,7 +1,5 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
-
 use \Bitrix\Main;
-
 /**
  * @global CMain $APPLICATION
  * @var array $arParams
@@ -15,8 +13,10 @@ use \Bitrix\Main;
 
 $this->setFrameMode(true);
 
+
 if (isset($arResult['ITEM']))
 {
+	
 	$item = $arResult['ITEM'];
 	$areaId = $arResult['AREA_ID'];
 	$itemIds = array(
@@ -102,7 +102,8 @@ if (isset($arResult['ITEM']))
 	$itemHasDetailUrl = isset($item['DETAIL_PAGE_URL']) && $item['DETAIL_PAGE_URL'] != '';
 	?>
 
-	<div class="goods" id="<?=$areaId?>" data-entity="item">
+	<div class="goods"
+		id="<?=$areaId?>">
 		<?
 		$documentRoot = Main\Application::getDocumentRoot();
 		$templatePath = strtolower($arResult['TYPE']).'/template.php';
