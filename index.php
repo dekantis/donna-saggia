@@ -1,74 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Мебельная компания");
-?>
-
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.detail", 
-	"slider.main", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"BROWSER_TITLE" => "-",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "slider.main",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "N",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "N",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "N",
-		"DISPLAY_TOP_PAGER" => "N",
-		"ELEMENT_CODE" => "slider_main",
-		"ELEMENT_ID" => "",
-		"FIELD_CODE" => array(
-			0 => "DETAIL_PICTURE",
-			1 => "",
-		),
-		"IBLOCK_ID" => "4",
-		"IBLOCK_TYPE" => "news",
-		"IBLOCK_URL" => "",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"MESSAGE_404" => "",
-		"META_DESCRIPTION" => "-",
-		"META_KEYWORDS" => "-",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Страница",
-		"PROPERTY_CODE" => array(
-			0 => "UF_WIDTH",
-			1 => "UF_HEIGHT",
-			2 => "UF_RIGHT_NAME",
-			3 => "UF_RIGHT_DESCRIPTION",
-			4 => "UF_PICS",
-			5 => "UF_RIGHT_FILE",
-			6 => "UF_RIGHT_DOWN_FILE",
-			7 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_CANONICAL_URL" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"STRICT_SECTION_CHECK" => "N",
-		"USE_PERMISSIONS" => "N",
-		"USE_SHARE" => "N"
-	),
-	false
-);?>	
+?>	
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section.list", 
 	"main", 

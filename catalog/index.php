@@ -1,7 +1,9 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("");
-?><?$APPLICATION->IncludeComponent(
+?>
+
+<?$APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
 	"catalog", 
 	array(
@@ -256,7 +258,7 @@ $APPLICATION->SetTitle("");
 		"USE_STORE" => "N",
 		"COMPONENT_TEMPLATE" => "catalog",
 		"SEF_URL_TEMPLATES" => array(
-			"sections" => "",
+			//"sections" => "",
 			"section" => "#SECTION_ID#/",
 			"element" => "#SECTION_ID#/#ELEMENT_ID#/",
 			"smart_filter" => "#SECTION_ID#/filter/#SMART_FILTER_PATH#/apply/",

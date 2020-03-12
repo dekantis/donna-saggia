@@ -149,126 +149,117 @@ $generalParams = array(
 
 $obName = 'ob'.preg_replace('/[^a-zA-Z0-9_]/', 'x', $this->GetEditAreaId($navParams['NavNum']));
 $containerName = 'container-'.$navParams['NavNum'];
-
-
-if ($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y')
-{
-	?>
-	<div class="bx-section-desc bx-<?=$arParams['TEMPLATE_THEME']?>">
-		<p class="bx-section-desc-post"><?=$arResult['DESCRIPTION']?></p>
-	</div>
-	<?
-}
 ?>
-
-<div class="catalog-list">
-	<div class="catalog-top">
-		<div class="catalog-top-text">
-			<h1>Каталог женской одежды</h1>
+<div class="catalog-content">
+	<div class="catalog-list">
+		<div class="catalog-top">
+			<div class="catalog-top-text">
+				<h1><? echo !empty($arResult["NAME"]) ? $arResult["NAME"] : "Каталог женской одеды";?></h1>
+			</div>
 		</div>
-	</div>
-	
-	
-	<div class="sort">
-		<div class="sort-left">
-		<?$revOrderPrice = $_REQUEST['SCALED_PRICE_1'] == 'asc' ? 'desc' : 'asc';?>
-		<?$revOrderByDate = $_REQUEST['active_from'] == 'asc' ? 'desc' : 'asc';?>
-		  Сортировать: 
-		  <a 
-			  class="<?=$revOrderPrice=='desc' ? 'active s-bottom' : 'active s-top' ?>" 
-			  href="<?=$APPLICATION->GetCurPage(). "?SCALED_PRICE_1={$revOrderPrice}"?>"
-			  >по цене
-		  </a> 
-		  <a 
-			class="<?=$revOrderByDate=='desc' ? 'active s-bottom' : 'active s-top' ?>"
-			href="<?=$APPLICATION->GetCurPage() . "?active_from={$revOrderByDate}"?>"
-			>по новизне</a>
+		
+		
+		<div class="sort">
+			<div class="sort-left">
+			<?$revOrderPrice = $_REQUEST['SCALED_PRICE_1'] == 'asc' ? 'desc' : 'asc';?>
+			<?$revOrderByDate = $_REQUEST['active_from'] == 'asc' ? 'desc' : 'asc';?>
+			  Сортировать: 
+			  <a 
+				  class="<?=$revOrderPrice=='desc' ? 'active s-bottom' : 'active s-top' ?>" 
+				  href="<?=$APPLICATION->GetCurPage(). "?SCALED_PRICE_1={$revOrderPrice}"?>"
+				  >по цене
+			  </a> 
+			  <a 
+				class="<?=$revOrderByDate=='desc' ? 'active s-bottom' : 'active s-top' ?>"
+				href="<?=$APPLICATION->GetCurPage() . "?active_from={$revOrderByDate}"?>"
+				>по новизне</a>
+			</div>
+			<?
+
+			if ($showTopPager)
+			{
+				?>
+				<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">		
+					<?=$arResult['NAV_STRING']?>
+				</div>
+				<?
+			}
+			?>
 		</div>
 		<?
-
-		if ($showTopPager)
+		if (!empty($arResult['ITEMS']))
+		{
+			$areaIds = array();
+			foreach ($arResult['ITEMS'] as $item)
+			{	
+				$uniqueId = $item['ID'].'_'.md5($this->randString().$component->getAction());
+				$areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
+				$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
+				$this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
+				
+				$APPLICATION->IncludeComponent(
+					'bitrix:catalog.item',
+					'',
+					array(
+						'RESULT' => array(
+							'ITEM' => $item,
+							'AREA_ID' => $areaIds[$item['ID']],
+							'TYPE' => 'card',
+							'BIG_LABEL' => 'N',
+							'BIG_DISCOUNT_PERCENT' => 'N',
+							'BIG_BUTTONS' => 'Y',
+							'SCALABLE' => 'N'
+						),
+						'PARAMS' => $generalParams
+							+ array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
+					),
+					$component,
+					array('HIDE_ICONS' => 'Y')
+				);
+												
+			}
+			unset($generalParams, $rowItems);
+		}
+		else
+		{
+			$APPLICATION->IncludeComponent(
+				'bitrix:catalog.item',
+				'',
+				array(),
+				$component,
+				array('HIDE_ICONS' => 'Y')
+			);
+		}
+		?>
+	</div>
+	<?
+	if ($showLazyLoad)
+	{
+		?>
+		<div class="row bx-<?=$arParams['TEMPLATE_THEME']?>">
+			<div class="btn btn-default btn-lg center-block" style="margin: 15px;"
+				data-use="show-more-<?=$navParams['NavNum']?>">
+				<?=$arParams['MESS_BTN_LAZY_LOAD']?>
+			</div>
+		</div>
+		<?
+	}
+	?>
+	<div class="sort last">
+		<div class="sort-left">
+			<a href="#" class="down">Наверх</a>
+		</div>
+		<?
+		if ($showBottomPager)
 		{
 			?>
-			<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">		
+			<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">
 				<?=$arResult['NAV_STRING']?>
 			</div>
 			<?
 		}
 		?>
 	</div>
-	<?
-	if (!empty($arResult['ITEMS']))
-	{
-		$areaIds = array();
-		foreach ($arResult['ITEMS'] as $item)
-		{	
-			$uniqueId = $item['ID'].'_'.md5($this->randString().$component->getAction());
-			$areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
-			$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
-			$this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
-			
-			$APPLICATION->IncludeComponent(
-				'bitrix:catalog.item',
-				'',
-				array(
-					'RESULT' => array(
-						'ITEM' => $item,
-						'AREA_ID' => $areaIds[$item['ID']],
-						'TYPE' => 'card',
-						'BIG_LABEL' => 'N',
-						'BIG_DISCOUNT_PERCENT' => 'N',
-						'BIG_BUTTONS' => 'Y',
-						'SCALABLE' => 'N'
-					),
-					'PARAMS' => $generalParams
-						+ array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
-				),
-				$component,
-				array('HIDE_ICONS' => 'Y')
-			);
-											
-		}
-		unset($generalParams, $rowItems);
-	}
-	else
-	{
-		$APPLICATION->IncludeComponent(
-			'bitrix:catalog.item',
-			'',
-			array(),
-			$component,
-			array('HIDE_ICONS' => 'Y')
-		);
-	}
-	?>
-</div>
-<?
-if ($showLazyLoad)
-{
-	?>
-	<div class="row bx-<?=$arParams['TEMPLATE_THEME']?>">
-		<div class="btn btn-default btn-lg center-block" style="margin: 15px;"
-			data-use="show-more-<?=$navParams['NavNum']?>">
-			<?=$arParams['MESS_BTN_LAZY_LOAD']?>
-		</div>
-	</div>
-	<?
-}
-?>
-<div class="sort last">
-	<div class="sort-left">
-		<a href="#" class="down">Наверх</a>
-	</div>
-	<?
-	if ($showBottomPager)
-	{
-		?>
-		<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">
-			<?=$arResult['NAV_STRING']?>
-		</div>
-		<?
-	}
-	?>
 </div>
 <?
 

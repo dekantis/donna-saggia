@@ -1,5 +1,8 @@
 .vscode
+.DS_Store
+/.idea/
 /bitrix/*
 !/bitrix/php_interface/
 !/bitrix/templates/
+/bitrix/php_interface/dbconn.php
 /upload/

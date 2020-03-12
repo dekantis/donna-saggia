@@ -18,7 +18,6 @@
 .info-menu li a:hover,
 .company-menu li a:hover,
 .goods-description h3 a:hover,
-.breadcrumbs a:hover,
 .product-right-inner a:hover,
 .product-name h3 a:hover,
 .delete:hover {
@@ -62,37 +61,7 @@
   height: 74px;
   background: url(images/logo.png) no-repeat 0 0;
 }
-.search-section {
-  width: 270px;
-  float: left;
-  padding-top: 2.5rem;
-}
-.search {
-  border: 1px solid #969696;
-  width: 100%;
-  height: 30px;
-  font-size: 0;
-  border-radius: 3px;
-}
-.search input[type=text] {
-  width: 89%;
-  box-sizing: border-box;
-  display: inline-block; 
-  height: 100%;
-  border: none;
-  padding: 0 1rem;
-  border-radius: 3px;
-  font-size: 12px;
-}
-.search input[type=submit] {
-  width: 11%;
-  box-sizing: border-box;
-  display: inline-block; 
-  height: 100%;
-  cursor: pointer;
-  border: none;
-  background: url(images/search.png) no-repeat center center;
-}
+
 .phones {
   float: left;
   padding-top: 2.5rem;

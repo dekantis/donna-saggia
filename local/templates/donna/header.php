@@ -33,18 +33,40 @@ use Bitrix\Main\Page\Asset;
 		<header id="header">	
 			<div class="inner">
 				<div id="logo">
-					<a href="<?=SITE_DIR?>" title="Название"></a>
+					<a title="<?=GetMessage('SITE_NAME')?>"></a>
 				</div>
-				<div class="search-section">
-					<form action="" method="post">			
-						<fieldset>
-							<div class="search">
-								<input type="text" name="search-input" placeholder="Поиск по названию и номеру артикула" value="" />
-								<input type="submit" name="submit" value="" />
-							</div>					
-						</fieldset>				
-					</form>
-				</div>
+						
+						
+							
+			<?$APPLICATION->IncludeComponent(
+				"bitrix:search.title", 
+				".default", 
+				array(
+					"CATEGORY_0" => array(
+						0 => "iblock_catalog",
+					),
+					"CATEGORY_0_TITLE" => "Товары",
+					"CATEGORY_0_iblock_catalog" => array(
+						0 => "1",
+					),
+					"CHECK_DATES" => "N",
+					"CONTAINER_ID" => "title-search",
+					"INPUT_ID" => "title-search-input",
+					"NUM_CATEGORIES" => "1",
+					"ORDER" => "date",
+					"PAGE" => "#SITE_DIR#search/index.php",
+					"SHOW_INPUT" => "Y",
+					"SHOW_OTHERS" => "N",
+					"TOP_COUNT" => "5",
+					"USE_LANGUAGE_GUESS" => "Y",
+					"COMPONENT_TEMPLATE" => ".default"
+				),
+				false
+			);?>
+								
+											
+									
+					
 				<?
 				$APPLICATION->IncludeFile(
 					SITE_DIR."include/phones1.html",
@@ -90,33 +112,91 @@ use Bitrix\Main\Page\Asset;
 			</div>			
 		</header>
 		<?$APPLICATION->IncludeComponent(
-			"bitrix:menu",
-			"top_menu",
-			Array(
+			"bitrix:menu", 
+			"horizontal_multilevel_top", 
+			array(
 				"ALLOW_MULTI_SELECT" => "N",
 				"CHILD_MENU_TYPE" => "left",
 				"DELAY" => "N",
-				"MAX_LEVEL" => "1",
-				"MENU_CACHE_GET_VARS" => array(0=>"",),
+				"MAX_LEVEL" => "2",
+				"MENU_CACHE_GET_VARS" => array(
+				),
 				"MENU_CACHE_TIME" => "3600",
 				"MENU_CACHE_TYPE" => "N",
 				"MENU_CACHE_USE_GROUPS" => "Y",
 				"ROOT_MENU_TYPE" => "top",
-				"USE_EXT" => "N"
-			)
+				"USE_EXT" => "Y",
+				"COMPONENT_TEMPLATE" => "horizontal_multilevel_top"
+			),
+			false
 		);?>
+		<?if($APPLICATION->GetCurDir() == "/")
+		{
+			$APPLICATION->IncludeComponent(
+				"bitrix:news.detail", 
+				"slider.main", 
+				array(
+					"ACTIVE_DATE_FORMAT" => "d.m.Y",
+					"ADD_ELEMENT_CHAIN" => "N",
+					"ADD_SECTIONS_CHAIN" => "N",
+					"AJAX_MODE" => "N",
+					"AJAX_OPTION_ADDITIONAL" => "",
+					"AJAX_OPTION_HISTORY" => "N",
+					"AJAX_OPTION_JUMP" => "N",
+					"AJAX_OPTION_STYLE" => "Y",
+					"BROWSER_TITLE" => "-",
+					"CACHE_GROUPS" => "Y",
+					"CACHE_TIME" => "36000000",
+					"CACHE_TYPE" => "A",
+					"CHECK_DATES" => "Y",
+					"COMPONENT_TEMPLATE" => "slider.main",
+					"DETAIL_URL" => "",
+					"DISPLAY_BOTTOM_PAGER" => "N",
+					"DISPLAY_DATE" => "N",
+					"DISPLAY_NAME" => "N",
+					"DISPLAY_PICTURE" => "Y",
+					"DISPLAY_PREVIEW_TEXT" => "N",
+					"DISPLAY_TOP_PAGER" => "N",
+					"ELEMENT_CODE" => "slider_main",
+					"ELEMENT_ID" => "",
+					"FIELD_CODE" => array(
+						0 => "DETAIL_PICTURE",
+						1 => "",
+					),
+					"IBLOCK_ID" => "4",
+					"IBLOCK_TYPE" => "news",
+					"IBLOCK_URL" => "",
+					"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+					"MESSAGE_404" => "",
+					"META_DESCRIPTION" => "-",
+					"META_KEYWORDS" => "-",
+					"PAGER_BASE_LINK_ENABLE" => "N",
+					"PAGER_SHOW_ALL" => "N",
+					"PAGER_TEMPLATE" => ".default",
+					"PAGER_TITLE" => "Страница",
+					"PROPERTY_CODE" => array(
+						0 => "UF_WIDTH",
+						1 => "UF_HEIGHT",
+						2 => "UF_RIGHT_NAME",
+						3 => "UF_RIGHT_DESCRIPTION",
+						4 => "UF_PICS",
+						5 => "UF_RIGHT_FILE",
+						6 => "UF_RIGHT_DOWN_FILE",
+						7 => "",
+					),
+					"SET_BROWSER_TITLE" => "N",
+					"SET_CANONICAL_URL" => "N",
+					"SET_LAST_MODIFIED" => "N",
+					"SET_META_DESCRIPTION" => "N",
+					"SET_META_KEYWORDS" => "N",
+					"SET_STATUS_404" => "N",
+					"SET_TITLE" => "N",
+					"SHOW_404" => "N",
+					"STRICT_SECTION_CHECK" => "N",
+					"USE_PERMISSIONS" => "N",
+					"USE_SHARE" => "N"
+				),
+				false
+			);
+		}?>
 		<section id="container">
-			<div class="breadcrumbs">
-				<?$APPLICATION->IncludeComponent(
-	"bitrix:breadcrumb", 
-	"catalog.breadcrumbs", 
-	array(
-		"COMPONENT_TEMPLATE" => "catalog.breadcrumbs",
-		"START_FROM" => "0",
-		"PATH" => "",
-		"SITE_ID" => "s1"
-	),
-	false
-);?>
-			</div>
-			<div class="inner">
