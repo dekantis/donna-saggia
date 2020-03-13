@@ -128,11 +128,12 @@ if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS']))
 									
 		$APPLICATION->IncludeComponent(
 			'bitrix:catalog.item',
-			'detail.pics',
+			'.default',
 			array(
 				'RESULT' => array(
 					'ITEM' => $item,
 					'AREA_ID' => $areaIds[$item['ID']],
+					'TYPE' => 'recomend',
 					'BIG_LABEL' => 'N',
 					'BIG_DISCOUNT_PERCENT' => 'N',
 					'BIG_BUTTONS' => 'N',

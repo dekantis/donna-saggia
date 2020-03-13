@@ -27,7 +27,7 @@ if($arParams["SHOW_INPUT"] !== "N"):?>
 	<form action="<?echo $arResult["FORM_ACTION"]?>" method="post">
 		<fieldset>
 			<div class="search">
-				<input id="<?echo $INPUT_ID?>" type="text" name="search-input" placeholder="Поиск по названию и номеру артикула" />
+				<input id="<?echo $INPUT_ID?>" type="text" name="search-input" placeholder="Поиск по названию" />
 			</div>
 		</fieldset>	
 	</form>

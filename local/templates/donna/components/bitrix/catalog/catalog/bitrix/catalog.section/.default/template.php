@@ -93,7 +93,6 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 		$labelPositionClass .= isset($positionClassMap[$pos]) ? ' '.$positionClassMap[$pos] : '';
 	}
 }
-
 $arParams['~MESS_BTN_BUY'] = $arParams['~MESS_BTN_BUY'] ?: Loc::getMessage('CT_BCS_TPL_MESS_BTN_BUY');
 $arParams['~MESS_BTN_DETAIL'] = $arParams['~MESS_BTN_DETAIL'] ?: Loc::getMessage('CT_BCS_TPL_MESS_BTN_DETAIL');
 $arParams['~MESS_BTN_COMPARE'] = $arParams['~MESS_BTN_COMPARE'] ?: Loc::getMessage('CT_BCS_TPL_MESS_BTN_COMPARE');
@@ -105,7 +104,10 @@ $arParams['~MESS_RELATIVE_QUANTITY_MANY'] = $arParams['~MESS_RELATIVE_QUANTITY_M
 $arParams['~MESS_RELATIVE_QUANTITY_FEW'] = $arParams['~MESS_RELATIVE_QUANTITY_FEW'] ?: Loc::getMessage('CT_BCS_CATALOG_RELATIVE_QUANTITY_FEW');
 
 $arParams['MESS_BTN_LAZY_LOAD'] = $arParams['MESS_BTN_LAZY_LOAD'] ?: Loc::getMessage('CT_BCS_CATALOG_MESS_BTN_LAZY_LOAD');
-
+if(empty($arParams["ITEM_TYPE"]))
+{
+	$arParams["ITEM_TYPE"] = "recomend";
+}
 $generalParams = array(
 	'SHOW_DISCOUNT_PERCENT' => $arParams['SHOW_DISCOUNT_PERCENT'],
 	'PRODUCT_DISPLAY_MODE' => $arParams['PRODUCT_DISPLAY_MODE'],
@@ -150,42 +152,59 @@ $generalParams = array(
 $obName = 'ob'.preg_replace('/[^a-zA-Z0-9_]/', 'x', $this->GetEditAreaId($navParams['NavNum']));
 $containerName = 'container-'.$navParams['NavNum'];
 ?>
+<div class="catalog-top">
+	<div class="catalog-top-text">
+		<h1><? echo !empty($arResult["NAME"]) ? $arResult["NAME"] : "Каталог женской одеды";?></h1>
+	</div>
+</div>
+<div class="sort">
+	<div class="sort-left">
+		<?if(isset($_REQUEST['SCALED_PRICE_1']))
+		{
+			$revOrderPrice = $_REQUEST['SCALED_PRICE_1'] == 'asc' ? 'desc' : 'asc';
+		}
+		?>
+		
+		<?if(isset($_REQUEST['active_from']))
+		{
+			$revOrderByDate = $_REQUEST['active_from'] == 'asc' ? 'desc' : 'asc';
+		}
+		?>
+		Сортировать: 
+		<a 
+			class="<?
+			if(!empty($revOrderPrice))
+			{
+				echo $revOrderPrice=='desc' ? 'active s-bottom' : 'active s-top';
+			}
+			?>" 
+			href="<?=$APPLICATION->GetCurPage(). "?SCALED_PRICE_1={$revOrderPrice}"?>"
+		>по цене
+		</a> 
+		<a 
+		class="<?
+		if(!empty($revOrderByDate))
+		{
+			echo $revOrderByDate=='desc' ? 'active s-bottom' : 'active s-top';
+		}
+		?>"
+		href="<?=$APPLICATION->GetCurPage() . "?active_from={$revOrderByDate}"?>"
+		>по новизне</a>
+	</div>
+	<?
+
+	if ($showTopPager)
+	{
+		?>
+		<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">		
+			<?=$arResult['NAV_STRING']?>
+		</div>
+		<?
+	}
+	?>
+</div>
 <div class="catalog-content">
 	<div class="catalog-list">
-		<div class="catalog-top">
-			<div class="catalog-top-text">
-				<h1><? echo !empty($arResult["NAME"]) ? $arResult["NAME"] : "Каталог женской одеды";?></h1>
-			</div>
-		</div>
-		
-		
-		<div class="sort">
-			<div class="sort-left">
-			<?$revOrderPrice = $_REQUEST['SCALED_PRICE_1'] == 'asc' ? 'desc' : 'asc';?>
-			<?$revOrderByDate = $_REQUEST['active_from'] == 'asc' ? 'desc' : 'asc';?>
-			  Сортировать: 
-			  <a 
-				  class="<?=$revOrderPrice=='desc' ? 'active s-bottom' : 'active s-top' ?>" 
-				  href="<?=$APPLICATION->GetCurPage(). "?SCALED_PRICE_1={$revOrderPrice}"?>"
-				  >по цене
-			  </a> 
-			  <a 
-				class="<?=$revOrderByDate=='desc' ? 'active s-bottom' : 'active s-top' ?>"
-				href="<?=$APPLICATION->GetCurPage() . "?active_from={$revOrderByDate}"?>"
-				>по новизне</a>
-			</div>
-			<?
-
-			if ($showTopPager)
-			{
-				?>
-				<div class="sort-right" data-pagination-num="<?=$navParams['NavNum']?>">		
-					<?=$arResult['NAV_STRING']?>
-				</div>
-				<?
-			}
-			?>
-		</div>
 		<?
 		if (!empty($arResult['ITEMS']))
 		{
@@ -204,7 +223,7 @@ $containerName = 'container-'.$navParams['NavNum'];
 						'RESULT' => array(
 							'ITEM' => $item,
 							'AREA_ID' => $areaIds[$item['ID']],
-							'TYPE' => 'card',
+							'TYPE' => $arParams["ITEM_TYPE"],
 							'BIG_LABEL' => 'N',
 							'BIG_DISCOUNT_PERCENT' => 'N',
 							'BIG_BUTTONS' => 'Y',

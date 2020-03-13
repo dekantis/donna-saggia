@@ -156,6 +156,7 @@
   border-radius: 3px;
   -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
+  cursor: pointer;
 }
 .result {
   background: url(images/result.png) no-repeat 0 0;

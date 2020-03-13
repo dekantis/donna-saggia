@@ -24,6 +24,7 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["Nav
 
 
 
+
 <?if($arResult["bDescPageNumbering"] === true):?>
 
 	<?=$arResult["NavFirstRecordShow"]?> <?=GetMessage("nav_to")?> <?=$arResult["NavLastRecordShow"]?> <?=GetMessage("nav_of")?> <?=$arResult["NavRecordCount"]?><br /></font>
@@ -79,7 +80,13 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["Nav
 	
 
 	<div class="page-navigation">
-
+	<?if ($arResult["bShowAll"]):?>
+		<?if ($arResult["NavShowAll"]):?>
+			&nbsp;<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>SHOWALL_<?=$arResult["NavNum"]?>=0" rel="nofollow"><?=GetMessage("nav_paged")?></a>
+		<?else:?>
+			&nbsp;<a class="see-all-nav" href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>SHOWALL_<?=$arResult["NavNum"]?>=1" rel="nofollow"><?=GetMessage("nav_all")?></a>
+		<?endif?>
+	<?endif?>
 	<?if ($arResult["NavPageNomer"] > 1):?>
 
 		<?if($arResult["bSavePage"]):die();?>
@@ -111,15 +118,5 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["Nav
 
 <?endif?>
 
-
-<?if ($arResult["bShowAll"]):?>
-<noindex>
-	<?if ($arResult["NavShowAll"]):?>
-		&nbsp;<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>SHOWALL_<?=$arResult["NavNum"]?>=0" rel="nofollow"><?=GetMessage("nav_paged")?></a>
-	<?else:?>
-		&nbsp;<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>SHOWALL_<?=$arResult["NavNum"]?>=1" rel="nofollow"><?=GetMessage("nav_all")?></a>
-	<?endif?>
-</noindex>
-<?endif?>
 
 </div>

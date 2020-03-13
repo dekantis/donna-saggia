@@ -30,3 +30,11 @@ input[type="text"], input[type="password"] {
     height: 30px;
     border-radius: 3px;
 }
+.blog-add-comment {
+    text-align: center;
+    padding-top: 0em;
+    padding-bottom: 1.5em;
+}
+div.blog-post-edit-form, div.blog-comment-fields {
+    background-color: #f1f1f1;
+}

@@ -130,7 +130,7 @@ use Bitrix\Main\Page\Asset;
 			),
 			false
 		);?>
-		<?if($APPLICATION->GetCurDir() == "/")
+		<?if($APPLICATION->GetCurPage() == "/")
 		{
 			$APPLICATION->IncludeComponent(
 				"bitrix:news.detail", 

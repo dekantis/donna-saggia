@@ -60,5 +60,4 @@ while ($product = $products->GetNext())
 	$arResult["RECOMENDED"][] = $product;		
 }
 $component = $this->getComponent();
-$component->arResultCacheKeys = array_merge($component->arResultCacheKeys, array("SLIDER_IMAGES", "PRODUCT_COLORS", "RECOMENDED"));
 $arParams = $component->applyTemplateModifications();

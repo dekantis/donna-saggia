@@ -24,11 +24,15 @@ else
 {
 	$basketAction = isset($arParams['TOP_ADD_TO_BASKET_ACTION']) ? $arParams['TOP_ADD_TO_BASKET_ACTION'] : '';
 }
-$smartFilterUrl = empty($arResult["VARIABLES"]["SECTION_ID"]) ?  
-	$arResult["FOLDER"] . "/index/" . $arResult["URL_TEMPLATES"]["smart_filter"] :
-	$arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"]
+if(empty($arResult["VARIABLES"]["SECTION_ID"])) 
+{	
+	$smartFilterUrl = $arResult["FOLDER"] . "/index/" . $arResult["URL_TEMPLATES"]["smart_filter"]; 
+}
+else
+{	
+	$smartFilterUrl = $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"];
+}
 ?>	<div class="inner">	
-		<div class="breadcrumbs">
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:breadcrumb", 
 				"catalog.breadcrumbs", 
@@ -38,10 +42,8 @@ $smartFilterUrl = empty($arResult["VARIABLES"]["SECTION_ID"]) ?
 					"PATH" => "",
 					"SITE_ID" => "s1"
 				),
-				false
+				$component
 			);?>
-		</div>
-	
 		
 		<div class="catalog">
 			<div class="sidebar-left">
@@ -64,7 +66,7 @@ $smartFilterUrl = empty($arResult["VARIABLES"]["SECTION_ID"]) ?
 							"VIEW_MODE" => $arParams["SECTIONS_VIEW_MODE"],
 							"SHOW_PARENT_NAME" => $arParams["SECTIONS_SHOW_PARENT_NAME"],
 							"HIDE_SECTION_NAME" => (isset($arParams["SECTIONS_HIDE_SECTION_NAME"]) ? $arParams["SECTIONS_HIDE_SECTION_NAME"] : "N"),
-							"ADD_SECTIONS_CHAIN" => (isset($arParams["ADD_SECTIONS_CHAIN"]) ? $arParams["ADD_SECTIONS_CHAIN"] : '')
+							"ADD_SECTIONS_CHAIN" => "Y"
 						),
 						$component,
 						($arParams["SHOW_TOP_ELEMENTS"] !== "N" ? array("HIDE_ICONS" => "Y") : array())
@@ -111,40 +113,27 @@ $smartFilterUrl = empty($arResult["VARIABLES"]["SECTION_ID"]) ?
 			
 			
 			<?
-			$sortPrice = &$arParams["ELEMENT_SORT_FIELD"];
-			$orderByPrice = &$arParams["ELEMENT_SORT_ORDER"];
-			$sortDate = &$arParams["ELEMENT_SORT_FIELD2"];
-			$orderByDate = &$arParams["ELEMENT_SORT_ORDER2"];
+			$sort = &$arParams["ELEMENT_SORT_FIELD"];
+			$orderBy= &$arParams["ELEMENT_SORT_ORDER"];
+
 							
-			if (!empty($_REQUEST['SCALED_PRICE_1']))
+			if (!empty($_REQUEST['SCALED_PRICE_1']) || !empty($_REQUEST['active_from'])) 
 			{
-				$sortPrice = 'SCALED_PRICE_1';
-				if($_REQUEST['SCALED_PRICE_1'] == 'asc')
+				$arParams["ELEMENT_SORT_FIELD2"] = "";
+				$arParams["ELEMENT_SORT_ORDER2"] = "";
+				if(!empty($_REQUEST['SCALED_PRICE_1'])) 
 				{
-					$orderByPrice = 'asc';
-					$revOrderPrice = 'desc';
+					
+					$sort = 'SCALED_PRICE_1';
+					$orderBy = $_REQUEST['SCALED_PRICE_1'] == 'asc' ? 'asc' : 'desc';
 				}
-				else 
-				{
-					$orderByPrice == 'desc';
-					$revOrderPrice = 'asc';
-				}
+				if (!empty($_REQUEST['active_from'])) 
+				{	
+					$sort = 'active_from';
+					$orderBy = $_REQUEST['active_from'] == 'asc' ? 'asc' : 'desc';						
+				} 
 			}
 			
-			if (!empty($_REQUEST['active_from'])) 
-			{	
-				$sortDate = 'active_from';
-				if($_REQUEST['active_from'] == 'asc')
-				{
-					$$orderByDate = 'asc';
-					$revOrderByDate = 'desc';
-				}
-				else 
-				{
-					$orderByDate == 'desc';
-					$revOrderByDate = 'asc';
-				}						
-			} 
 			$intSectionID = $APPLICATION->IncludeComponent(
 				"bitrix:catalog.section",
 				"",
@@ -152,9 +141,9 @@ $smartFilterUrl = empty($arResult["VARIABLES"]["SECTION_ID"]) ?
 					"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 					"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 					"ELEMENT_SORT_FIELD" => $arParams["ELEMENT_SORT_FIELD"],
+					"ELEMENT_SORT_FIELD2" => $arParams["ELEMENT_SORT_FIELD2"],
 					"ELEMENT_SORT_ORDER" =>  $arParams["ELEMENT_SORT_ORDER"],
-					"ELEMENT_SORT_FIELD2" =>  $arParams["ELEMENT_SORT_FIELD2"],
-					"ELEMENT_SORT_ORDER2" =>   $arParams["ELEMENT_SORT_ORDER2"],
+					"ELEMENT_SORT_ORDER2" =>  $arParams["ELEMENT_SORT_ORDER2"],
 					"PROPERTY_CODE" => (isset($arParams["LIST_PROPERTY_CODE"]) ? $arParams["LIST_PROPERTY_CODE"] : []),
 					"PROPERTY_CODE_MOBILE" => $arParams["LIST_PROPERTY_CODE_MOBILE"],
 					"META_KEYWORDS" => $arParams["LIST_META_KEYWORDS"],
@@ -271,13 +260,15 @@ $smartFilterUrl = empty($arResult["VARIABLES"]["SECTION_ID"]) ?
 					'BACKGROUND_IMAGE' => (isset($arParams['SECTION_BACKGROUND_IMAGE']) ? $arParams['SECTION_BACKGROUND_IMAGE'] : ''),
 					'COMPATIBLE_MODE' => (isset($arParams['COMPATIBLE_MODE']) ? $arParams['COMPATIBLE_MODE'] : ''),
 					'DISABLE_INIT_JS_IN_COMPONENT' => (isset($arParams['DISABLE_INIT_JS_IN_COMPONENT']) ? $arParams['DISABLE_INIT_JS_IN_COMPONENT'] : ''),
+					"SHOW_ALL_WO_SECTION"=>"Y",
 					
-					"SHOW_ALL_WO_SECTION"=>"Y"
+					"ITEM_TYPE" => "card"
 				),
 				$component
 			);
 			unset($basketAction);
-			
+			$APPLICATION->AddChainItem($APPLICATION->GetTitle());
 			?>			
 		</div>
 	</div>
+	

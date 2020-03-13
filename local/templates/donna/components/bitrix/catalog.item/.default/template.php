@@ -15,8 +15,7 @@ $this->setFrameMode(true);
 
 
 if (isset($arResult['ITEM']))
-{
-	
+{	
 	$item = $arResult['ITEM'];
 	$areaId = $arResult['AREA_ID'];
 	$itemIds = array(
@@ -102,8 +101,7 @@ if (isset($arResult['ITEM']))
 	$itemHasDetailUrl = isset($item['DETAIL_PAGE_URL']) && $item['DETAIL_PAGE_URL'] != '';
 	?>
 
-	<div class="goods"
-		id="<?=$areaId?>">
+	
 		<?
 		$documentRoot = Main\Application::getDocumentRoot();
 		$templatePath = strtolower($arResult['TYPE']).'/template.php';
@@ -291,7 +289,7 @@ if (isset($arResult['ITEM']))
 		<script>
 		  var <?=$obName?> = new JCCatalogItem(<?=CUtil::PhpToJSObject($jsParams, false, true)?>);
 		</script>
-	</div>
+	
 	<?
 	unset($item, $actualItem, $minOffer, $itemIds, $jsParams);
 }

@@ -25,3 +25,9 @@
     background: -ms-linear-gradient(to top, #d81617 0%, #f34648 70%, #f34648 100%);
     background: linear-gradient(to top, #d81617 0%, #f34648 70%, #f34648 100%);
 }
+.page-navigation a.see-all-nav {
+    padding: 0px 10px;
+    width: auto;
+    border: none;
+    margin-right: 1.5rem;
+}

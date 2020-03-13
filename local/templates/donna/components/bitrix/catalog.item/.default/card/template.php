@@ -23,10 +23,11 @@ use \Bitrix\Main\Localization\Loc;
  */
 
 ?>
-
+<div class="goods" id="<?=$areaId?>">
 <?
 if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y')
 {?>
+
 	<div class="<?
 	foreach($item['DISPLAY_PROPERTIES'] as $key=>$property)
 	{
@@ -137,4 +138,5 @@ if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y')
 		</div>
 		<?endif;?>
 	</div>
+</div>
 </div>
