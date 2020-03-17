@@ -41,7 +41,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 				<img src="{{IMAGE_URL}}">
 			</td>
 			<td class="product-name">
-				<h3>{{NAME}}</h3>
+			{{#DETAIL_PAGE_URL}}
+				<a href="{{DETAIL_PAGE_URL}}"><h3>{{NAME}}</h3></a>
+			{{/DETAIL_PAGE_URL}}
 				{{#PREVIEW_TEXT}}
 					<p>{{{PREVIEW_TEXT}}}</p>
 				{{/PREVIEW_TEXT}}
@@ -60,7 +62,7 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 				</div>
 			</td>
 			<? if ($useSumColumn) : ?>
-				<td class="sum-bag"><span class="property-name"><?=GetMessage("SBB_SUM_NAME")?>:</span>{{{SUM_FULL_PRICE_FORMATED}}}</td>
+				<td class="sum-bag"><span class="property-name"><?=GetMessage("SBB_SUM_NAME")?>:</span>{{{SUM_PRICE_FORMATED}}}</td>
 			<? endif; ?>
 
 			<? if ($useActionColumn) : ?>

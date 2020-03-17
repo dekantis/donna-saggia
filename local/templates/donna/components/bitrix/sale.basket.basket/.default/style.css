@@ -133,6 +133,18 @@ td .quantity .plus  {
   display: inline-block;
   margin-bottom: 3rem;
 }
+#basket-item-table-head th#SUM {
+	cursor: pointer;
+	text-align: center;
+	color:blue;
+	font-weight:bold;
+}
+#basket-item-table-head th#SUM.desc {
+	background: url(/local/templates/donna/components/bitrix/catalog/catalog/bitrix/catalog.section/.default/images/sort.png) no-repeat right center;		    
+}
+#basket-item-table-head th#SUM.asc {
+	background: url(/local/templates/donna/components/bitrix/catalog/catalog/bitrix/catalog.section/.default/images/sort-b.png) no-repeat right center;
+}
 @media (max-width: 630px) {
   .property-name {
     display: inline-block;

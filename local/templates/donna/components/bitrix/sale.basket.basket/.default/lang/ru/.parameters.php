@@ -5,6 +5,7 @@ $MESS["CP_SBB_TPL_THEME_SITE"] = "Брать тему из настроек са
 $MESS["CP_SBB_TPL_THEME_BLUE"] = "Синяя (тема по умолчанию)";
 $MESS["CP_SBB_TPL_THEME_GREEN"] = "Зеленая";
 $MESS["CP_SBB_TPL_THEME_RED"] = "Красная";
+$MESS["CP_SBB_SUM_PRICE_SORT"] = "Сортировка по цене";
 $MESS["CP_SBB_TPL_THEME_YELLOW"] = "Желтая";
 $MESS["CP_SBB_TPL_DEFERRED_REFRESH"] = "Использовать механизм отложенной актуализации данных товаров с провайдером";
 $MESS["CP_SBB_TPL_SHOW_RESTORE"] = "Разрешить восстановление удалённых товаров";

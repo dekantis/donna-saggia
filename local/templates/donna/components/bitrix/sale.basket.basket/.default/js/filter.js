@@ -275,7 +275,7 @@
 			this.realSortedItems = BX.util.array_values(this.component.sortedItems);
 			this.realScrollTop = this.component.getDocumentScrollTop();
 		}
-
+		
 		this.component.scrollToFirstItem();
 
 		this.component.sortedItems = this.searchItems();
@@ -320,7 +320,6 @@
 		{
 			this.activeFilterMode = false;
 			this.component.sortedItems = BX.util.array_values(this.realSortedItems);
-
 			this.component.deleteBasketItems(BX.util.array_values(this.component.shownItems), false);
 			this.hideEmptyFilterResult();
 
@@ -334,7 +333,6 @@
 	BX.Sale.BasketFilter.prototype.searchItems = function()
 	{
 		var items = [];
-
 		for (var i = 0; i < this.realSortedItems.length; i++)
 		{
 			var item = this.component.items[this.realSortedItems[i]];

@@ -16,7 +16,6 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\ModuleManager;
 
 $this->setFrameMode(true);
-
 if (isset($arParams['USE_COMMON_SETTINGS_BASKET_POPUP']) && $arParams['USE_COMMON_SETTINGS_BASKET_POPUP'] == 'Y')
 {
 	$basketAction = (isset($arParams['COMMON_ADD_TO_BASKET_ACTION']) ? array($arParams['COMMON_ADD_TO_BASKET_ACTION']) : array());
@@ -410,7 +409,7 @@ if (isset($arParams['USER_CONSENT_IS_LOADED']))
 						<?
 						$APPLICATION->IncludeComponent(
 							"bitrix:catalog.comments",
-							"detail.view.element",
+							"",
 							Array(
 								"BLOG_TITLE" => "Комментарии",
 								"BLOG_URL" => "catalog_comments",
@@ -433,8 +432,7 @@ if (isset($arParams['USER_CONSENT_IS_LOADED']))
 								"URL_TO_COMMENT" => "",
 								"VK_USE" => "N",
 								"WIDTH" => ""
-							),
-							$component
+							)
 						);
 						?>
 					</div>

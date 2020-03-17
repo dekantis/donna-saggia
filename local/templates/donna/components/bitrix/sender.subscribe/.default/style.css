@@ -1,0 +1,9 @@
+.subscribe input[type=email] {
+    width: 85%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 100%;
+    border: none;
+    padding: 0 1rem;
+    border-radius: 3px;
+}

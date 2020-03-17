@@ -2,7 +2,7 @@
 
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Sale\PriceMaths;
-
+global $APPLICATION;
 /**
  *
  * This file modifies result for every request (including AJAX).

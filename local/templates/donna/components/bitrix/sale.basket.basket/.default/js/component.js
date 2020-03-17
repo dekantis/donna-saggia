@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 	'use strict';
 
 	BX.namespace('BX.Sale.BasketComponent');
@@ -32,9 +32,11 @@
 			itemListOverlay: 'basket-items-list-overlay',
 			warning: 'basket-warning'
 		},
+		
 
 		initializePrimaryFields: function()
 		{
+
 			this.templates = {};
 			this.nodes = {};
 
@@ -77,7 +79,6 @@
 			}
 
 			var headTableItemTemplate = this.getTemplate('basket-table-head-item');
-
 			for (var i in this.result.COLUMNS)
 			{
 				if (this.result.COLUMNS.hasOwnProperty(i))
@@ -92,7 +93,7 @@
 		init: function(parameters)
 		{
 			this.initializePrimaryFields();
-
+		
 			this.params = parameters.params || {};
 			this.template = parameters.template || '';
 			this.signedParamsString = parameters.signedParamsString || '';
@@ -105,24 +106,27 @@
 			this.useItemsFilter = this.params.SHOW_FILTER === 'Y' && !this.isMobile;
 
 			this.initializeFilter();
+			
 			this.applyBasketResult(parameters.result);
 			this.initializeActionPool();
-
+			
 			if (this.useItemsFilter)
 			{
 				this.checkHeaderDisplay();
 				this.bindHeaderEvents();
 			}
-
+			
 			this.initializeTableHeaders();
 			this.initializeBasketItems();
 			this.editTotal();
 			this.editWarnings();
-
+			this.sort = this.params.SUM_PRICE_SORT;
 			this.getCacheNode(this.ids.basketRoot).style.opacity = 1;
 
 			this.bindInitialEvents();
+			this.BindSortEvent();
 		},
+		
 
 		getTemplate: function(templateName)
 		{
@@ -164,7 +168,9 @@
 
 			return parent.querySelectorAll(additionalFilter + '[data-entity="' + entity + '"]');
 		},
-
+		
+		
+		
 		bindInitialEvents: function()
 		{
 			this.bindWarningEvents();
@@ -173,8 +179,27 @@
 			BX.bind(window, 'scroll', BX.proxy(this.lazyLoad, this));
 
 			BX.bind(window, 'resize', BX.throttle(this.checkStickyHeaders, 20, this));
-		},
 
+			
+		},
+		BindSortEvent: function()
+		{	
+			var sortRev;
+			var sort = this.params.BASKET_SORT;
+			var elem = BX('SUM');
+			if(sort == "ASC")
+			{
+				sortRev = "DESC";
+				BX.addClass(elem, "asc");
+			}
+			else
+			{
+				sortRev = "ASC";
+				BX.addClass(elem, "desc");
+			}			
+			BX.bind(elem, 'click', function(){window.location.href = "/bag/?SORT=" + sortRev;});
+			
+		},
 		bindWarningEvents: function()
 		{
 			var showItemsNode = this.getEntity(BX(this.ids.warning), 'basket-items-warning-count');
@@ -635,6 +660,7 @@
 		initializeFilter: function()
 		{
 			this.filter = new BX.Sale.BasketFilter(this);
+			
 		},
 
 		/**
@@ -655,7 +681,7 @@
 				}
 			}
 
-			BX.ajax({
+			BX.ajax({				
 				method: 'POST',
 				dataType: 'json',
 				url: this.ajaxUrl,
@@ -686,7 +712,7 @@
 					this.applyBasketResult(result.BASKET_DATA);
 					this.editBasketItems(this.getItemsToEdit());
 					this.editTotal();
-
+					
 					this.applyPriceAnimation();
 					this.editWarnings();
 
@@ -735,7 +761,7 @@
 				int: {}
 			};
 		},
-
+		
 		applyBasketResult: function(result)
 		{
 			this.changedItems = [];
@@ -791,15 +817,22 @@
 
 			this.result = result;
 		},
-
-		itemSortFunction: function(a, b)
-		{
+		
+		itemAscSortFunction: function(a, b)
+		{	
 			if (!this.items.hasOwnProperty(a) || !this.items.hasOwnProperty(b))
 			{
 				return 0;
 			}
-
-			return parseFloat(this.items[a].SORT) - parseFloat(this.items[b].SORT);
+			return parseFloat(this.items[a].SUM_PRICE) - parseFloat(this.items[b].SUM_PRICE);
+		},
+		itemDescSortFunction: function(a, b)
+		{	
+			if (!this.items.hasOwnProperty(a) || !this.items.hasOwnProperty(b))
+			{
+				return 0;
+			}
+			return parseFloat(this.items[b].SUM_PRICE) - parseFloat(this.items[a].SUM_PRICE);
 		},
 
 		getChangedSimilarOffers: function()
@@ -886,8 +919,8 @@
 
 		isItemAvailable: function(itemId)
 		{
+			
 			var sortedItems = this.filter.isActive() ? this.filter.realSortedItems : this.sortedItems;
-
 			return !this.items[itemId].NOT_AVAILABLE
 				&& !this.items[itemId].SHOW_RESTORE
 				&& BX.util.in_array(itemId, sortedItems);
@@ -1249,7 +1282,6 @@
 				}
 
 				this.bindBasketItemEvents(this.items[itemId]);
-
 				if (this.filter.isActive())
 				{
 					this.filter.highlightSearchMatch(this.items[itemId]);
@@ -1566,14 +1598,31 @@
 				}
 			}
 		},
-
+		
+		
 		sortSortedItems: function(all)
 		{
-			this.sortedItems.sort(BX.proxy(this.itemSortFunction, this));
+			
+			if(this.params.BASKET_SORT == "DESC")
+			{
+				this.sortedItems.sort(BX.proxy(this.itemDescSortFunction, this));
+			}
+			else
+			{
+				this.sortedItems.sort(BX.proxy(this.itemAscSortFunction, this))
+			};
 
+			
 			if (all && this.filter.isActive())
 			{
-				this.filter.realSortedItems.sort(BX.proxy(this.itemSortFunction, this));
+				if(this.params.BASKET_SORT == "DESC")
+				{
+					this.filter.realSortedItems.sort(BX.proxy(this.itemDescSortFunction, this));
+				}
+				else
+				{
+					this.filter.realSortedItems.sort(BX.proxy(this.itemAscSortFunction, this));
+				};			
 			}
 		},
 
@@ -2185,7 +2234,9 @@
 
 			entity = this.getEntity(node, 'basket-item-remove-delayed');
 			BX.bind(entity, 'click', BX.proxy(this.removeDelayedAction, this));
-
+			
+			
+			
 			entity = this.getEntity(node, 'basket-item-merge-sku-link');
 			BX.bind(entity, 'click', BX.proxy(this.mergeAction, this));
 

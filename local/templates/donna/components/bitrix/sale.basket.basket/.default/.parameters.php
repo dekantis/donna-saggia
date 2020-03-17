@@ -42,6 +42,12 @@ if (is_dir($dir))
 		$themes[$themeId] = $themeName;
 	}
 }
+$arTemplateParameters['SUM_PRICE_SORT'] = array(
+	'PARENT' => 'BASE',
+	'NAME' => GetMessage('CP_SBB_SUM_PRICE_SORT'),
+	'TYPE' => 'STRING',
+	'DEFAULT' => 'ASC'
+);
 
 $arTemplateParameters['DEFERRED_REFRESH'] = array(
 	'PARENT' => 'BASE',

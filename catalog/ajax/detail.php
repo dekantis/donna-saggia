@@ -136,7 +136,7 @@ $APPLICATION->IncludeComponent(
 		"USE_PRICE_COUNT" => "N",
 		"USE_PRODUCT_QUANTITY" => "N",
 		"USE_RATIO_IN_RANGES" => "N",
-		"USE_VOTE_RATING" => "N",
+		"USE_VOTE_RATING" => "Y",
 		"COMPONENT_TEMPLATE" => "test"
 	),
 	false

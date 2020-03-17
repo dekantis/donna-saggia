@@ -3,6 +3,16 @@
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
 
+if ($_GET["SORT"] == "ASC" || $_GET["SORT"] == "DESC")
+{
+	$_SESSION["SORT_BASKET"] = $_GET["SORT"];
+}
+if(empty($_SESSION["SORT_BASKET"]))
+{
+	$_SESSION["SORT_BASKET"] = "ASC";
+}
+$arParams["BASKET_SORT"] =  $_SESSION["SORT_BASKET"];
+	
 \Bitrix\Main\UI\Extension::load("ui.fonts.ruble");
 
 /**
@@ -17,8 +27,6 @@ use Bitrix\Main\Localization\Loc;
  */
 
 $documentRoot = Main\Application::getDocumentRoot();
-
-
 if (!isset($arParams['DISPLAY_MODE']) || !in_array($arParams['DISPLAY_MODE'], array('extended', 'compact')))
 {
 	$arParams['DISPLAY_MODE'] = 'extended';

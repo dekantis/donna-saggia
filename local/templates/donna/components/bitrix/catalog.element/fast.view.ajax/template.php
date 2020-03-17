@@ -194,23 +194,23 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 								<?if ($arParams['USE_VOTE_RATING'] === 'Y')
 								{
 									$APPLICATION->IncludeComponent(
-										'bitrix:iblock.vote',
-										'stars',
+										"bitrix:iblock.vote",
+										"stars",
 										array(
-											'CUSTOM_SITE_ID' => isset($arParams['CUSTOM_SITE_ID']) ? $arParams['CUSTOM_SITE_ID'] : null,
-											'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
-											'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-											'ELEMENT_ID' => $arResult['ID'],
-											'ELEMENT_CODE' => '',
-											'MAX_VOTE' => '5',
-											'VOTE_NAMES' => array('1', '2', '3', '4', '5'),
-											'SET_STATUS_404' => 'N',
-											'DISPLAY_AS_RATING' => $arParams['VOTE_DISPLAY_AS_RATING'],
-											'CACHE_TYPE' => $arParams['CACHE_TYPE'],
-											'CACHE_TIME' => $arParams['CACHE_TIME']
+											"CUSTOM_SITE_ID" => isset($arParams["CUSTOM_SITE_ID"]) ? $arParams["CUSTOM_SITE_ID"] : null,
+											"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+											"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+											"ELEMENT_ID" => $arResult["ID"],
+											"ELEMENT_CODE" => "",
+											"MAX_VOTE" => "5",
+											"VOTE_NAMES" => array("1", "2", "3", "4", "5"),
+											"SET_STATUS_404" => "N",
+											"DISPLAY_AS_RATING" => $arParams["VOTE_DISPLAY_AS_RATING"],
+											"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+											"CACHE_TIME" => $arParams["CACHE_TIME"]
 										),
 										$component,
-										array('HIDE_ICONS' => 'Y')
+										array("HIDE_ICONS" => "Y")
 									);
 								}?>
 							</div>
@@ -280,15 +280,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 						<div class="images-color">
 							<?foreach($arResult["PRODUCT_COLORS"] as $productColor):?>
 								<span>
-								<?if($arParams['SEF_MODE'] == 'Y')
-								{
-									$linkColor = '/catalog/' . $arResult['IBLOCK_SECTION_ID'] . '/' . $productColor["ID"] . '/';
-								}
-								else
-								{
-									$linkColor = $productColor["DETAIL_PAGE_URL"];
-								}?>
-									<a href="<?=$linkColor?>">
+									<a href="<?=$productColor["DETAIL_PAGE_URL"]?>">
 										<img src="<?=$productColor["PREVIEW_PICTURE"]?>">
 									</a>
 								</span>

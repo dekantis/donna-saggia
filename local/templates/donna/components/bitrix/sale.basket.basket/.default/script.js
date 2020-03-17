@@ -20,25 +20,7 @@ jQuery(document).ready(function() {
 	});
 	counter();
 	total();
-	jQuery(".quantity div").on("click", function() {
-    
-    var button = jQuery(this);
-    var oldValue = button.parent().find("input").val();
 
-    if (button.text() == "+") {
-      var newVal = oldValue*1 + 1;
-    } else {
-     // Don't allow decrementing below zero
-      if (oldValue > 0) {
-        var newVal = oldValue*1 - 1;
-      } else {
-        newVal = 0;
-      }
-    }
-
-    button.parent().find("input").val(newVal);
-    jQuery(this).parents(".quantity").find("input").trigger("keyup")
-  });
 });
 
 function total(){
@@ -256,9 +238,8 @@ function updateBasketTable(basketItemId, res)
 			// fill row with fields' values
 			oCellMargin = newRow.insertCell(-1);
 			oCellMargin.setAttribute('class', 'margin');
-
+			
 			arColumns = res.COLUMNS.split(',');
-
 			for (i = 0; i < arColumns.length; i++)
 			{
 				if (arColumns[i] === 'DELETE')
@@ -707,6 +688,7 @@ function updateBasketTable(basketItemId, res)
 
 		BX.onCustomEvent('OnBasketChange');
 	}
+	
 }
 /**
  * @param couponBlock
@@ -1212,7 +1194,6 @@ function recalcBasketAjax(params)
 
 	basketPoolQuantity.setProcessing(true);
 	basketPoolQuantity.clearPool();
-
 	BX.ajax({
 		url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
 		method: 'POST',
@@ -1473,8 +1454,8 @@ BX.ready(function() {
 
 	basketPoolQuantity = new BasketPoolQuantity();
 	var couponBlock = BX('coupons_block'),
-		basketItems = BX('basket_items');
-
+		basketItems = BX('basket_items');	
+	
 	if (BX.type.isElementNode(couponBlock))
 		BX.bindDelegate(couponBlock, 'click', { 'attribute': 'data-coupon' }, deleteCoupon);
 
